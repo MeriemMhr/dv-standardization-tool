@@ -3,7 +3,7 @@ name: Contribution Suggestion
 description: Suggest a new alias, feature, or improvement to the DV standardization tool
 title: "[Suggestion]: "
 labels: [enhancement]
-assignees: ''
+assignees: []
 body:
   - type: textarea
     id: summary
