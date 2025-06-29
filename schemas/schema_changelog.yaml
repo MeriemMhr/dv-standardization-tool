@@ -1,0 +1,12 @@
+v0.1:
+  date: '2025-06-29'
+  changes:
+  - Initial schema created with 7 standardized DV categories
+  - Added support for 'task_completion_time', 'user_satisfaction', and 'mental_effort'
+  - Established alias list using insights from annotated datasets
+v0.2:
+  date: '2025-07-03'
+  changes:
+  - Integrated 5 new DV concepts from community suggestions
+  - Refined alias naming to ensure snake_case compliance
+  - Added schema metadata and validation rule files for reproducibility
