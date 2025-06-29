@@ -1,0 +1,24 @@
+/* style.css */
+
+/* Hide Streamlit branding and footer */
+footer, #MainMenu {visibility: hidden;}
+
+/* Customize headers */
+h1 {
+    font-family: 'Segoe UI', sans-serif;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+/* Add padding to sections */
+section {
+    padding: 1rem 2rem;
+}
+
+/* Button styling override */
+.stDownloadButton>button {
+    background-color: #2c3e50;
+    color: white;
+    border-radius: 6px;
+    font-weight: 600;
+}
