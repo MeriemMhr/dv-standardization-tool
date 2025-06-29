@@ -20,7 +20,7 @@ While the HCI community has increasingly embraced open science practices, critic
 - Cross-study synthesis and meta-analysis  
 - Dataset reuse and integration  
 - Empirical reproducibility  
-- Compliance with FAIR data principles
+- Compliance with [FAIR data principles](https://www.go-fair.org/fair-principles/)
 
 Despite ongoing advocacy for open methods (Koelle et al., 2024; Goodman et al., 2022), raw data sharing and construct standardization remain underdeveloped in practice. This tool directly addresses those limitations by offering a practical, evidence-driven solution.
 
