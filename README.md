@@ -131,11 +131,12 @@ Aligned with the UK AI regulatory framework, the tool is classified as a **"supp
 ---
 
 ## Future Work
-* Extend the mapping schema to cover qualitative and mixed-method DVs
-* Integrate fuzzy matching capabilities (`rapidfuzz`)
-* Build a lightweight [Streamlit](https://streamlit.io) UI for upload-based DV harmonization
-* Investigate interoperability with semantic frameworks (e.g., CEDAR, BioPortal)
-* Pilot the tool across additional HCI datasets and disseminate as a reusable research artifact
+* Extend the mapping schema to cover qualitative and mixed-method dependent variables, accounting for construct diversity in mixed designs.
+* Integrate fuzzy matching capabilities (e.g., via `rapidfuzz`) to enhance robustness against minor lexical variations and human-annotated inconsistencies.
+* Build a lightweight [Streamlit](https://streamlit.io) user interface to enable upload-based DV harmonization for non-technical users and HCI practitioners.
+* Investigate interoperability with semantic frameworks and metadata standards (e.g., CEDAR, BioPortal) to facilitate alignment with existing ontology-driven research infrastructures.
+* Explore the integration of large language models (LLMs) for context-aware variable suggestion, auto-tagging, and disambiguation. This would allow the tool to provide intelligent recommendations for ambiguous or undocumented variable names based on surrounding metadata, potentially accelerating schema expansion and dataset onboarding.
+* Pilot the tool across a broader range of HCI datasets and venues, and refine it into a reusable, community-adoptable research artifact supporting long-term reproducibility and responsible data practices.
 
 ---
 
@@ -148,7 +149,7 @@ If you use or adapt this tool in your research, please cite:
 
 ## Contact
 
-**Author**: Meriem Mehri
-**Supervisor**: Mark Colley
-**Institution**: UCL Interaction Centre (UCLIC), University College London
-**Email**: [meriem.mehri.24@ucl.ac.uk](mailto:meriem.mehri.24@ucl.ac.uk) ; [m.colley@ucl.ac.uk](mailto:m.colley@ucl.ac.uk)
+* **Author**: Meriem Mehri
+* **Supervisor**: Mark Colley
+* **Institution**: UCL Interaction Centre (UCLIC), University College London
+* **Contact emails**: [meriem.mehri.24@ucl.ac.uk](mailto:meriem.mehri.24@ucl.ac.uk) ; [m.colley@ucl.ac.uk](mailto:m.colley@ucl.ac.uk)
