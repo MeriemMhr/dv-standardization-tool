@@ -1,7 +1,7 @@
 ## Standardizing Reporting of Dependent Variables in HCI Research 
-**A Naming Scheme and Conversion Tool for Open Data**
+### A Naming Scheme and Conversion Tool for Open Data
 
-* **Author:** Meriem Mehri, MSc Artificial Intelligence for Sustainable Development (UCL - Computer Science Department)
+* **Student Author:** Meriem Mehri, MSc Artificial Intelligence for Sustainable Development (UCL - Computer Science Department)
 * **Academic Supervisor**: Professor [Mark Colley](https://m-colley.github.io/), UCL Interaction Centre (UCLIC)  
 
 ---
