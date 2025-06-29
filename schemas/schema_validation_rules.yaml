@@ -1,0 +1,16 @@
+naming_conventions:
+  standard_name_format: snake_case
+  alias_format: snake_case
+constraints:
+  max_alias_length: 50
+  min_alias_length: 3
+  allow_duplicate_aliases: false
+  allow_empty_aliases: false
+reserved_keywords:
+- 'null'
+- none
+- nan
+- undefined
+- n/a
+validation_notes: This file defines non-enforced rules for formatting and consistency
+  checks used by schema validators or review processes.

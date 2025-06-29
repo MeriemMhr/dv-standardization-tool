@@ -1,0 +1,20 @@
+interaction_efficiency:
+- response_speed
+- action_latency
+- interaction_time
+navigation_accuracy:
+- wayfinding_success
+- route_precision
+- navigation_success
+error_resolution_time:
+- debug_duration
+- fix_time
+- recovery_time
+learning_rate:
+- adaptation_speed
+- acquisition_time
+- learning_time
+frustration_level:
+- irritation_score
+- annoyance_level
+- negative_affect
