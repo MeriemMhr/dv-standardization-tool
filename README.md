@@ -158,7 +158,7 @@ This repository is designed as a reproducible research artifact and welcomes com
 
 To contribute, please fork the repository, follow the existing schema structure and coding conventions, and submit a pull request or open an issue. All contributions are reviewed with attention to transparency, traceability, and scholarly rigor.
 
-**Lightweight issue and pull request templates are provided to streamline collaboration and maintain research transparency:**
+**Lightweight issue (a) and pull request (b) templates are provided to streamline collaboration and maintain research transparency.**
 
 #### a. `.github/ISSUE_TEMPLATE/contribution-suggestion.md`
 
@@ -229,7 +229,7 @@ Describe briefly what this pull request introduces or changes.
 
 ---
 
-## Contact
+## Contact Details
 
 * **Author**: Meriem Mehri
 * **Supervisor**: Mark Colley
