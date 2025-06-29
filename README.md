@@ -36,6 +36,7 @@ Despite ongoing advocacy for open methods (Koelle et al., 2024; Goodman et al., 
 ---
 
 ## Repository Structure
+This repository functions as a testbed to evaluate the viability of a canonical naming scheme for dependent variables (DVs) in HCI research and to empirically ground the hypothesis that harmonizing DV nomenclature can significantly enhance dataset interoperability, reuse, and reproducibility. Each folder and script within the repository was carefully aligned with dissertation components to ensure traceability across research stages. The schemas/ directory houses the naming scheme that operationalizes the standardization logic. The scripts/ folder contains the conversion tool’s core implementation, demonstrating how real datasets can be mapped using this schema. The notebooks/ directory supports prototyping, iterative schema validation, and the documentation of key design decisions. Raw input data and standardized outputs are stored respectively in data/raw/ and data/processed/, thereby offering before/after evidence for tool performance and transformation fidelity. Additional design rationale, transparency strategies, and schema expansion plans are documented in docs/, reinforcing the project’s alignment with open science principles. Altogether, the repository serves not only as a demonstration artifact but also as an empirical anchor for validating the dissertation’s core research claims.
 
 ```bash
 dv-standardization-tool/
