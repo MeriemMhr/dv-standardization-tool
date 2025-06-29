@@ -1,4 +1,4 @@
-# Schema–Dataset Misalignments: Diagnosis and Resolution
+# Schema-Dataset Misalignments: Diagnosis and Resolution
 
 This document highlights frequent issues related to mismatches between the DV schema and incoming datasets. It supports accurate transformation workflows and promotes schema evolution based on real-world inconsistencies.
 
@@ -26,7 +26,7 @@ The schema (`standard_dv_mapping.yaml`) maps known aliases to canonical dependen
   ```yaml
   user_satisfaction:
     - avgSatisfaction
-    - satisfaction_level````
+    - satisfaction_level
 
 ---
 
