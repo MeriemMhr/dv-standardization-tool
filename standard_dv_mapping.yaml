@@ -1,0 +1,29 @@
+task_completion_time:
+- time_spent
+- completion_duration
+- task_time
+- duration
+user_satisfaction:
+- satisfaction_score
+- satisfaction_rating
+- user_feedback
+error_rate:
+- mistake_ratio
+- failure_rate
+- error_percentage
+click_through_rate:
+- ctr
+- click_ratio
+- clicks_per_view
+retention_time:
+- dwell_time
+- session_duration
+- time_on_task
+mental_effort:
+- cognitive_load
+- mental_load
+- workload_rating
+engagement_level:
+- user_engagement
+- attention_score
+- engagement_index
