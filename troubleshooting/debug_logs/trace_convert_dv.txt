@@ -1,0 +1,30 @@
+TRACE LOG — convert_dv.py
+===========================
+
+Run Timestamp: 2024-07-01 15:26:42
+
+INPUT FILE: ./data/raw/hci_survey_blockA.csv
+SCHEMA FILE: ./schemas/standard_dv_mapping.yaml
+
+----------------------------------------------------
+[INFO] Columns detected in raw file:
+['taskTime', 'MentalEffort', 'usabilityRating', 'age', 'Condition']
+
+[INFO] Normalizing column headers...
+[INFO] Matching columns using exact + alias lookup...
+
+[MATCH] 'taskTime' → 'task_completion_time'  (alias matched)
+[MATCH] 'MentalEffort' → 'cognitive_load'    (fuzzy match score: 91)
+[MATCH] 'usabilityRating' → 'system_usability_scale' (manual schema match)
+
+[SKIPPED] 'age' — not a dependent variable
+[SKIPPED] 'Condition' — not a dependent variable
+
+----------------------------------------------------
+[INFO] Output saved to: ./data/processed/hci_survey_blockA_cleaned.csv
+
+[SUMMARY]
+Mapped Columns:       3
+Unmapped/Skipped:     2
+Fuzzy Matches Used:   1
+Errors:               0
