@@ -1,9 +1,8 @@
 ## Standardizing Reporting of Dependent Variables in HCI Research 
 **A Naming Scheme and Conversion Tool for Open Data**
 
-Meriem Mehri  
-MSc Artificial Intelligence for Sustainable Development (UCL - Computer Science Department)
-Supervised by Professor Mark Colley, UCL Interaction Centre (UCLIC)  
+* **Author:** Meriem Mehri, MSc Artificial Intelligence for Sustainable Development (UCL - Computer Science Department)
+* **Academic Supervisor**: Professor [Mark Colley](https://m-colley.github.io/), UCL Interaction Centre (UCLIC)  
 
 ---
 
@@ -160,7 +159,6 @@ This repository is designed as a reproducible research artifact and welcomes com
 To contribute, please fork the repository, follow the existing schema structure and coding conventions, and submit a pull request or open an issue. All contributions are reviewed with attention to transparency, traceability, and scholarly rigor.
 
 **Lightweight issue and pull request templates are provided to streamline collaboration and maintain research transparency:**
-Here is a **lightweight issue and pull request template suite** you can include in your GitHub repository. This enhances collaboration while remaining clean, minimal, and aligned with scholarly open science practices.
 
 #### a. `.github/ISSUE_TEMPLATE/contribution-suggestion.md`
 
