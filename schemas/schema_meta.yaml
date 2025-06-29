@@ -1,0 +1,18 @@
+schema_name: Standard DV Mapping for HCI
+version: '0.1'
+last_updated: '2025-06-29'
+author: Meriem Mehri
+description: This schema defines standardized dependent variable (DV) names and common
+  aliases to support interoperability and reproducibility in HCI research datasets.
+  It is part of an MSc dissertation exploring open data reporting practices and harmonization.
+repository: https://github.com/your-username/OpenDV-HCI
+license: MIT
+contact: meriem.mehri@example.com
+intended_use: To facilitate column harmonization in open HCI datasets, improve comparability
+  across studies, and support tool-based variable standardization.
+citation:
+  author: Meriem Mehri
+  title: 'OpenDV-HCI: A Naming Scheme and Conversion Tool for Dependent Variables
+    in HCI Datasets'
+  year: '2025'
+  note: MSc Dissertation, University College London
