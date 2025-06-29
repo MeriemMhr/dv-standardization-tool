@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/notebooks/prototype_notebook.ipynb", line 8, in <module>
+    df_clean = standardize_columns(df, schema)
+  File "/scripts/convert_dv.py", line 42, in standardize_columns
+    new_col = mapping[col]
+KeyError: 'completionTime '
+
+Reason: The column name 'completionTime ' includes a trailing space, not accounted for in the schema.
+
+Suggested Fix:
+- Strip whitespace from column names before matching (e.g., col.strip()).
+- Add the cleaned alias to 'task_completion_time' in standard_dv_mapping.yaml.
+- Restart the notebook kernel to clear memory of cached schema versions.

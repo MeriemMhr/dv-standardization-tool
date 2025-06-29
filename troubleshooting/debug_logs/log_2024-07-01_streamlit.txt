@@ -1,0 +1,10 @@
+[2024-07-01 14:01:32] INFO: Streamlit app started on http://localhost:8501
+[2024-07-01 14:01:35] INFO: Uploaded file: sample_hci_dataset.csv
+[2024-07-01 14:01:36] INFO: Detected columns: ['completionTime', 'mentalLoad', 'avgSatisfaction']
+[2024-07-01 14:01:37] WARNING: Column 'completionTime ' (trailing space) not found in schema
+[2024-07-01 14:01:37] INFO: Attempting fuzzy match for unmapped column...
+[2024-07-01 14:01:38] INFO: Fuzzy match suggestion: 'task_completion_time' (score: 92)
+[2024-07-01 14:01:40] ERROR: Column 'avgSatisfaction' mapped ambiguously — both 'user_satisfaction' and 'perceived_usefulness' are plausible
+[2024-07-01 14:01:42] INFO: Data preview rendered successfully
+[2024-07-01 14:01:43] INFO: Export button triggered — writing cleaned file to ./data/processed/sample_hci_dataset_cleaned.csv
+[2024-07-01 14:01:45] INFO: Session ended by user
