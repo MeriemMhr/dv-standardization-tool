@@ -1,5 +1,5 @@
 ## OpenDV-HCI: A Toolkit for Reproducible Mapping and Reporting of Dependent Variables
-**Standardizing Outcome Measures in Empirical HCI Research Through Schema-Driven Conversion and Open Data Harmonization**
+## `Standardizing Outcome Measures in Empirical HCI Research Through Schema-Driven Conversion and Open Data Harmonization`
 
 * **Postgraduate Contributor:** [Meriem Mehri](https://www.linkedin.com/in/meriem-mehri/), [UCL Engineering - Computer Science Department](https://www.ucl.ac.uk/engineering/computer-science)
 * **Academic Supervisor**: [Mark Colley](https://m-colley.github.io/), [UCL Interaction Centre (UCLIC)](https://www.ucl.ac.uk/uclic)
