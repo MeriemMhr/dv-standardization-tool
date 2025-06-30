@@ -5,6 +5,9 @@
 * **Academic Supervisor**: [Mark Colley](https://m-colley.github.io/), [UCL Interaction Centre (UCLIC)](https://www.ucl.ac.uk/uclic)
 * **Programme**: Artificial Intelligence for Sustainable Development MSc
 
+<img src="standardization_flowchart.png" alt="Column standardization pipeline" width="750"/>
+
+> This diagram outlines the full standardization and naming pipeline — from raw dataset upload and optional LLM inference to column matching, canonicalization, and final export. It represents the conceptual framework guiding both backend logic and UI implementation.
 ---
 
 ## Overview
