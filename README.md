@@ -145,7 +145,7 @@ Aligned with the UK AI regulatory framework, the tool is classified as a **"supp
 ## Citation
 If you use or adapt this tool in your research, please cite:
 
-> Mehri, M. (2025). *Standardizing Reporting of Dependent Variables in HCI Research: A Naming Scheme and Conversion Tool for Open Data* \[MSc Dissertation, UCL]. UCL Interaction Centre. [GitHub Repository](https://github.com/yourusername/dv-standardization-tool)
+> Mehri, M. (2025). *Standardizing Reporting of Dependent Variables in HCI Research: A Naming Scheme and Conversion Tool for Open Data* \[MSc Dissertation, UCL]. UCL Interaction Centre. [GitHub Repository](https://github.com/MeriemMhr/dv-standardization-tool)
 
 ---
 
