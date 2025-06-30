@@ -7,7 +7,7 @@
 
 <img src="standardization_flowchart.png" alt="Column standardization pipeline" width="750"/>
 
-> This diagram outlines the full standardization and naming pipeline — from raw dataset upload and inference to column matching, canonicalization, and final export. It represents the conceptual framework guiding both backend logic and UI implementation.
+> This diagram outlines the full standardization and naming pipeline — from raw dataset upload and inference to column matching, canonicalization, and final export. It represents the conceptual framework guiding the core logic and schema design of the project.
 ---
 
 ## Overview
