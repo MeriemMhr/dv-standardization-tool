@@ -25,4 +25,4 @@ The system consists of four key components:
 
 ## Example Input–Output Flow
 **Input**: `raw_dataset.csv` + `schema.yaml`  
-**Output**: `standardized_dataset.csv` + `trace_convert_dv.txt`
+**Output**: `processed_dataset.csv` + `trace_convert_dv.txt`
