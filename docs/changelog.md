@@ -1,4 +1,4 @@
-# 📜 Repository Changelog
+# Repository Changelog
 
 This document logs human-readable updates to the repo's functionality, structure, and features.
 
