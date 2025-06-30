@@ -9,7 +9,7 @@ The system consists of four key components:
 4. **Preview & Visualization Module** (in development): Interface to visualize broken schemas or DV collisions (see `broken_schema_preview_example.png`).
 
 ## Workflow
-[Dataset Upload]
+[Dataset Upload] \
 ↓
 [Schema Parser]
 ↓
