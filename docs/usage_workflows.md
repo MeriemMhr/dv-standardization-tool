@@ -21,7 +21,7 @@ This guide walks you through how to interact with the core components of the DV 
 
 ---
 
-## 🛠 Script-based Usage
+## Script-based Usage
 
 For CLI workflows or batch processing:
 
