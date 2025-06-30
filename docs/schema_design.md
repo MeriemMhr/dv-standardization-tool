@@ -24,3 +24,5 @@ dependent_variable:
     - time_taken
     - completion_time
     - total_time
+````
+**Schema Validation:** Implemented through the schema validator and visualized in error logs.
