@@ -2,7 +2,7 @@
 
 This guide walks you through how to interact with the core components of the DV Standardization Tool using either the scripts or the notebooks.
 
-## 🔁 General Workflow
+## General Workflow
 
 1. Upload a dataset (`ui/components/uploader.py`)
 2. Preview columns (`ui/components/column_preview.py`)
@@ -12,7 +12,7 @@ This guide walks you through how to interact with the core components of the DV 
 
 ---
 
-## 🧪 Notebook-based Usage
+## Notebook-based Usage
 
 - **`prototype_notebook.ipynb`**: Ideal for testing logic and validating transformations.
 - **`schema_builder.ipynb`**: Helps iteratively define/edit `standard_dv_mapping.yaml`.
