@@ -9,13 +9,13 @@ The system consists of four key components:
 4. **Preview & Visualization Module** (in development): Interface to visualize broken schemas or DV collisions (see `broken_schema_preview_example.png`).
 
 ## Workflow
-[Dataset Upload] \
-↓
-[Schema Parser]
-↓
-[DV Conversion Engine]
-↓
-[Output: Standardized Dataset + Logs]
+[Dataset Upload]\
+↓\
+[Schema Parser]\
+↓\
+[DV Conversion Engine]\
+↓\
+[Output: Standardized Dataset + Logs]\
 
 ## Technologies Used
 - YAML for schema representation
