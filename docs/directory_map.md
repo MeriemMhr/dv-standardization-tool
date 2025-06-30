@@ -1,4 +1,4 @@
-# 📁 Repository Directory Map
+# Repository Directory Map
 
 This document outlines the folder structure and purpose of each key directory.
 
@@ -16,9 +16,3 @@ ui/
     components/          → Streamlit helper scripts
     assets/              → CSS and logo for styling
 ```
-
-📌 See screenshots:  
-![Tree](github-dv-1.png)  
-![Notebooks](github-dv-2.png)  
-![Scripts](github-dv-3.png)  
-![UI](github-dv-4.png)
