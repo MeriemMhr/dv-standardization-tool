@@ -1,5 +1,4 @@
 ### Project Documentation Overview
----
 
 The `docs/` directory serves as the central hub for all internal documentation related to the project. It provides clear guidance on directory structure, development rationale, future plans, and key references. This structure is designed to support collaboration, reproducibility, and ongoing iteration throughout the research and prototyping phases.
 
