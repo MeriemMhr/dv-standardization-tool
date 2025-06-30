@@ -39,30 +39,74 @@ Despite ongoing advocacy for open methods (Koelle et al., 2024; Goodman et al., 
 ---
 
 ## Repository Structure & Rationale
-This repository functions as a testbed to evaluate the viability of a canonical naming scheme for dependent variables (DVs) in HCI research and to empirically ground the hypothesis that harmonizing DV nomenclature can significantly enhance dataset interoperability, reuse, and reproducibility. Each folder and script within the repository was carefully aligned with dissertation components to ensure traceability across research stages. The `schemas/` directory houses the naming scheme that operationalizes the standardization logic. The `scripts/` folder contains the conversion tool’s core implementation, demonstrating how real datasets can be mapped using this schema. The `notebooks/` directory supports prototyping, iterative schema validation, and the documentation of key design decisions. Raw input data and standardized outputs are stored respectively in `data/raw/` and `data/processed/`, thereby offering before/after evidence for tool performance and transformation fidelity. Additional design rationale, transparency strategies, and schema expansion plans are documented in `docs/`, reinforcing the project’s alignment with open science principles. Altogether, the repository serves not only as a demonstration artifact but also as an empirical anchor for validating the dissertation’s core research claims.
+This repository functions as a testbed to evaluate the viability of a canonical naming scheme for dependent variables (DVs) in HCI research and to empirically ground the hypothesis that harmonizing DV nomenclature can significantly enhance dataset interoperability, reuse, and reproducibility. Each folder and script within the repository was carefully aligned with dissertation components to ensure traceability across research stages. The `schemas/` directory houses the naming scheme that operationalizes the standardization logic. The `scripts/` folder contains the conversion tool’s core implementation, demonstrating how real datasets can be mapped using this schema. The notebooks/ directory supports schema ideation (schema_builder.ipynb), validation testing (prototype_notebook.ipynb), visual exploration (visual_validation.ipynb), and forward-looking LLM prototyping (llm_inference_prototype.ipynb). Raw input data and standardized outputs are stored respectively in `data/raw/` and `data/processed/`, thereby offering before/after evidence for tool performance and transformation fidelity. Additional design rationale, transparency strategies, and schema expansion plans are documented in `docs/`, reinforcing the project’s alignment with open science principles. Altogether, the repository serves not only as a demonstration artifact but also as an empirical anchor for validating the dissertation’s core research claims.
 
 ```bash
 dv-standardization-tool/
 ├── data/
-│   ├── raw/                  # Original datasets (e.g., CHI open datasets)
-│   └── processed/            # Cleaned datasets with standardized DV names
+│   ├── raw/                      # Original datasets (e.g., CHI open datasets)
+│   └── processed/                # Datasets after DV standardization
 │
 ├── schemas/
-│   └── standard_dv_mapping.yaml  # Canonical DV naming scheme
+│   ├── standard_dv_mapping.yaml         # Canonical DV naming scheme
+│   ├── schema_meta.yaml                 # Schema metadata (versioning, authorship)
+│   ├── schema_validation_rules.yaml     # Optional constraint rules
+│   ├── example_alias_submissions.yaml   # Sample community submissions
+│   └── schema_changelog.yaml            # Manual schema evolution tracking
 │
 ├── scripts/
-│   └── convert_dv.py         # Core logic for schema-based transformation
+│   ├── convert_dv.py            # Core logic for DV transformation
+│   ├── schema_utils.py          # Flattening, validation, and schema helpers
+│   ├── visual_helpers.py        # Comparison visualizations
+│   ├── validate_schema.py       # Schema sanity check
+│   └── llm_utils.py             # Optional LLM inference logic
 │
 ├── notebooks/
-│   └── prototype_notebook.ipynb  # Literature-driven schema prototyping and testing
+│   ├── prototype_notebook.ipynb         # Main schema validation/testing
+│   ├── schema_builder.ipynb             # Manual YAML construction notebook
+│   ├── visual_validation.ipynb          # Schema alignment visualization
+│   └── llm_inference_prototype.ipynb    # Optional LLM-based prototype
+│
+├── ui/
+│   ├── app.py                   # Streamlit app entry point
+│   ├── uploader.py              # Upload logic
+│   ├── column_preview.py        # Column-level feedback
+│   ├── download_button.py       # Download-ready output
+│   ├── assets/
+│   │   └── style.css            # Minimal styling
+│   └── components/              # Optional modular UI elements
+│
+├── .github/
+│   └── ISSUE_TEMPLATE/
+│       └── contribution-suggestion.md
+│   └── PULL_REQUEST_TEMPLATE.md
 │
 ├── docs/
-│   └── future_plans.md       # Streamlit UI draft, architecture notes
+│   ├── overview.md
+│   ├── architecture.md
+│   ├── usage_workflows.md
+│   ├── schema_design.md
+│   ├── dataset_guidelines.md
+│   ├── future_plans.md
+│   ├── directory_map.md
+│   ├── troubleshooting_index.md
+│   └── changelog.md
 │
-├── .gitignore
+├── troubleshooting/
+│   ├── known_issues.md
+│   ├── schema_mismatches.md
+│   ├── notebook_dependency_notes.md
+│   ├── log_2024-07-01_streamlit_example.txt
+│   ├── llm_prompt_failures.md
+│   ├── trace_convert_dv.txt
+│   ├── notebook_kernel_error.txt
+│   └── broken_schema_preview_example.png
+│
 ├── LICENSE
-└── README.md
-````
+├── .gitignore
+├── README.md
+└── requirements.txt
+```
 
 ---
 
@@ -88,9 +132,19 @@ user_satisfaction:
   - satisfaction_score
   - subjective_rating
 ```
+> For practical workflows and applied examples, refer to [`docs/usage_workflows.md`](docs/usage_workflows.md).
 
 ---
+## Capabilities
 
+- Schema-driven conversion of raw DV columns into standardized formats
+- YAML-based mapping logic for extensibility and transparency
+- Visualization of schema coverage and alignment across datasets
+- Optional LLM-based inference for alias suggestion (prototype stage)
+- Reproducible prototyping via Jupyter notebooks
+- Optional lightweight UI layer for upload-to-export interaction
+
+---
 ## Methodology
 This project followed a rigorous structured literature review methodology defined under the COMP0190 module at UCL. Key steps included:
 
