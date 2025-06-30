@@ -12,4 +12,4 @@ This document logs human-readable updates to the repo's functionality, structure
 - Established full pipeline validation through `convert_dv.py` and `visual_validation.ipynb`
 - Populated the `docs/` directory for transparency
 
-✳ Schema-specific updates: see `schemas/schema_changelog.yaml`
+Schema-specific updates: see `schemas/schema_changelog.yaml`
