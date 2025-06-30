@@ -24,5 +24,5 @@ The system consists of four key components:
 - GitHub for version control
 
 ## Example Input–Output Flow
-**Input**: `raw_dataset.csv` + `schema.yaml`  
+**Input**: `raw_dataset.csv` + `standard_dv_mapping.yaml`  
 **Output**: `processed_dataset.csv` + `trace_convert_dv.txt`
