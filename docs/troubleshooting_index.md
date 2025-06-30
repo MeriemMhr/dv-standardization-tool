@@ -1,8 +1,8 @@
-# 🔧 Troubleshooting Index
+# Troubleshooting Index
 
 This guide aggregates and categorizes known bugs, schema problems, and notebook issues.
 
-## 🧭 Reference Map
+## Reference Map
 
 | Type            | File                                  | Description |
 |-----------------|----------------------------------------|-------------|
