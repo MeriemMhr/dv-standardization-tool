@@ -201,13 +201,14 @@ Aligned with the UK AI regulatory framework, the tool is classified as a **"supp
 ## References
 
 *The following represent a selected subset of key academic references that informed the design rationale, methodological approach, and conceptual framing of this project. While not exhaustive, these citations reflect foundational contributions to discussions on reproducibility, open science, and metadata standardization in empirical HCI research:*
-* Goodman, N., & Koelle, M. (2024). *Changing Lanes Toward Open Science: Envisioning an Open, Transparent Future for Empirical HCI Research*. In *Proceedings of the ACM on Human-Computer Interaction (PACMHCI)*, CHI 2024. [https://doi.org/10.1145/XXXXXX](https://doi.org/10.1145/XXXXXX) *(Update with correct DOI when available)*.
 
-* Wilkinson, M. D., Dumontier, M., Aalbersberg, I. J., et al. (2016). The FAIR Guiding Principles for scientific data management and stewardship. *Scientific Data*, 3, 160018. [https://doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
-* 
-* Aeschbach, L., Williamson, J., Cox, A. L., & Vogt, K. (2021). *“If It’s Important It Will Be in the Dataset”: A Critical Approach to Open HCI Data Sharing*. In *Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems* (pp. 1–15). Association for Computing Machinery. [https://doi.org/10.1145/3411764.3445634](https://doi.org/10.1145/3411764.3445634)
+* **Goodman, N., & Koelle, M. (2024).** *Changing Lanes Toward Open Science: Envisioning an Open, Transparent Future for Empirical HCI Research*. In *Proceedings of the ACM on Human-Computer Interaction (PACMHCI)*, CHI 2024. [https://doi.org/10.1145/3640792.3675730)]([https://doi.org/10.1145/XXXXXX](https://dl.acm.org/doi/10.1145/3640792.3675730)
+
+* **Putze, F., Koelle, M., & Boll, S. (2022).** *Towards Standardized Reporting of User Study Metadata in HCI Research: Taxonomy and Implications*. In *Extended Abstracts of the 2022 CHI Conference on Human Factors in Computing Systems* (CHI EA '22). Association for Computing Machinery. [https://doi.org/10.1145/3491101.3519896](https://doi.org/10.1145/3491101.3519896)
   
-* Putze, F., Koelle, M., & Boll, S. (2022). *Towards Standardized Reporting of User Study Metadata in HCI Research: Taxonomy and Implications*. In *Extended Abstracts of the 2022 CHI Conference on Human Factors in Computing Systems* (CHI EA '22). Association for Computing Machinery. [https://doi.org/10.1145/3491101.3519896](https://doi.org/10.1145/3491101.3519896)
+* **Aeschbach, L., Williamson, J., Cox, A. L., & Vogt, K. (2021).** *“If It’s Important It Will Be in the Dataset”: A Critical Approach to Open HCI Data Sharing*. In *Proceedings of the 2021 CHI Conference on Human Factors in Computing Systems* (pp. 1–15). Association for Computing Machinery. [https://doi.org/10.1145/3411764.3445634](https://doi.org/10.1145/3411764.3445634)
+  
+* **Wilkinson, M. D., Dumontier, M., Aalbersberg, I. J., et al. (2016).** The FAIR Guiding Principles for scientific data management and stewardship. *Scientific Data*, 3, 160018. [https://doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
 
 ---
 
