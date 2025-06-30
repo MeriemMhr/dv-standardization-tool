@@ -16,5 +16,5 @@ The initiative aligns with SDG 12 (Responsible Consumption and Production) by pr
 - **Case study**: Demonstrate the interoperability potential of the tool via sample transformations.
 - **Long-term impact**: Foster more reproducible and FAIR-aligned HCI research practices.
 
-## Status [July 2025]
+## Status (07.25)
 Currently in the prototyping phase; schema design complete and initial dataset mappings underway.
