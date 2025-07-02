@@ -1,0 +1,33 @@
+# Core dependencies
+pandas>=1.4
+numpy>=1.21
+pyyaml>=6.0
+tqdm>=4.64
+
+# Visualization & schema debugging
+matplotlib>=3.5
+seaborn>=0.11
+plotly>=5.10
+
+# Notebook & prototyping
+jupyterlab>=3.5
+notebook>=6.4
+ipykernel>=6.15
+
+# Optional LLM utilities
+openai>=1.0.0
+sentence-transformers>=2.2.2
+transformers>=4.30
+
+# Fuzzy matching for schema expansion
+rapidfuzz>=2.13
+
+# Streamlit UI (optional)
+streamlit>=1.25
+watchdog>=2.1.9
+
+# YAML schema validation (optional)
+cerberus>=1.3.4
+
+# Others (misc utils)
+scikit-learn>=1.2
