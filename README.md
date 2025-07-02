@@ -148,7 +148,7 @@ user_satisfaction:
 ## Methodology
 This project followed a rigorous structured literature review methodology defined under the COMP0190 module at UCL. Key steps included:
 
-* Review of >100 papers across CHI (2017–2024), CHI PLAY, AutoUI, and IMWUT using PRISMA principles.
+* Review of >100 papers across CHI (2015-2025), CHI PLAY, AutoUI, and IMWUT, etc. — using PRISMA principles.
 * Thematic coding of DV terminology, transparency practices, and naming patterns.
 * Development of schema based on recurring inconsistencies in the literature (cf. Aeschbach et al., 2021; Putze et al., 2022).
 * Evaluation through a pilot case study using the ROADS dataset (Colley et al., 2024).
