@@ -209,11 +209,23 @@ Aligned with the UK AI regulatory framework, the tool is classified as a **"supp
 ---
 
 ## Citation
-If you use or adapt this tool in your research, please cite:
+If you use this repository or the accompanying tool, please cite:
 
-> Mehri, M. (2025). *Standardizing Reporting of Dependent Variables in HCI Research: A Naming Scheme and Conversion Tool for Open Data* \[MSc Dissertation, UCL]. UCL Interaction Centre. [GitHub Repository](https://github.com/MeriemMhr/dv-standardization-tool)
+> Mehri, M. (2025). *Breaking data silos in HCI: A standardized framework and open-source tool for FAIR, reproducible, and cumulative research (MSc dissertation, University College London)*. UCL Interaction Centre. [GitHub Repository](https://github.com/MeriemMhr/dv-standardization-tool)
 
----
+
+#### BibTeX
+
+```bibtex
+@mastersthesis{mehri2025dvs,
+  author       = {Meriem Mehri},
+  title        = {Breaking Data Silos in HCI: A Standardized Framework and Open-Source Tool for FAIR, Reproducible, and Cumulative Research},
+  school       = {University College London (UCL) Interaction Centre},
+  year         = {2025},
+  type         = {Master's Dissertation},
+  url          = {https://ucl.ac.uk/interaction-centre},
+}
+```
 
 ## Contact Details
 
