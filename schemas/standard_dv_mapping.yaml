@@ -1,29 +1,249 @@
-task_completion_time:
-- time_spent
-- completion_duration
-- task_time
-- duration
-user_satisfaction:
-- satisfaction_score
-- satisfaction_rating
-- user_feedback
-error_rate:
-- mistake_ratio
-- failure_rate
-- error_percentage
-click_through_rate:
-- ctr
-- click_ratio
-- clicks_per_view
-retention_time:
-- dwell_time
-- session_duration
-- time_on_task
-mental_effort:
-- cognitive_load
-- mental_load
-- workload_rating
-engagement_level:
-- user_engagement
-- attention_score
-- engagement_index
+version: "2.0"
+updated: "2025-09-07"
+
+# all `cluster` values must match an ID in thematic_clusters.yaml
+
+dvs:
+
+  # ---------------- Performance ----------------
+  - id: task_completion_time
+    label: "Task Completion Time"
+    cluster: performance
+    aliases:
+      - time_spent
+      - completion_duration
+      - task_time
+      - duration
+      - time_on_task
+    instruments: []
+    units: [ "s", "ms" ]
+    notes: "Lower-is-better; report central tendency + dispersion."
+
+  - id: task_success
+    label: "Task Success Rate"
+    cluster: performance
+    aliases:
+      - success_rate
+      - completion_rate
+      - task_success_ratio
+    instruments: []
+    units: [ "%", "proportion" ]
+    notes: "Define success criteria clearly."
+
+  - id: error_rate
+    label: "Error Rate"
+    cluster: performance
+    aliases:
+      - mistake_ratio
+      - failure_rate
+      - error_percentage
+      - error_count
+    instruments: []
+    units: [ "%", "count", "errors/task" ]
+    notes: "Distinguish slips vs mistakes if available."
+
+  - id: efficiency
+    label: "Efficiency"
+    cluster: performance
+    aliases:
+      - throughput
+      - keystrokes_per_task
+      - steps_per_task
+    instruments: []
+    units: [ "tasks/min", "actions/task" ]
+    notes: "Report how computed (e.g., tasks/min; actions/task)."
+
+  # ------------- Behavioral / Interactional -------------
+  - id: click_through_rate
+    label: "Click-Through Rate"
+    cluster: behavioral_interaction
+    aliases:
+      - ctr
+      - click_ratio
+      - clicks_per_view
+    instruments: []
+    units: [ "%", "ratio" ]
+
+  - id: interaction_events
+    label: "Interaction Events"
+    cluster: behavioral_interaction
+    aliases:
+      - clicks
+      - taps
+      - keystrokes
+      - interactions
+    instruments: []
+    units: [ "count", "events/min" ]
+
+  - id: retention_time
+    label: "Retention / Dwell Time"
+    cluster: behavioral_interaction
+    aliases:
+      - dwell_time
+      - session_duration
+    instruments: []
+    units: [ "s", "min" ]
+
+  # ---------------- Cognitive Load ----------------
+  - id: mental_effort
+    label: "Mental Effort"
+    cluster: cognitive_load
+    aliases:
+      - cognitive_load
+      - mental_load
+      - workload_rating
+    instruments:
+      - "NASA-TLX (Global or Subscales)"
+      - "Paas Scale"
+      - "RSME"
+    units: [ "Likert", "VAS" ]
+
+  - id: situational_awareness
+    label: "Situational Awareness"
+    cluster: cognitive_load
+    aliases:
+      - sa
+    instruments:
+      - "SAGAT"
+    units: [ "score" ]
+
+  # ---------------- UX & Satisfaction ----------------
+  - id: user_satisfaction
+    label: "User Satisfaction"
+    cluster: ux_satisfaction
+    aliases:
+      - satisfaction_score
+      - satisfaction_rating
+      - user_feedback
+      - perceived_quality
+    instruments:
+      - "SUS"
+      - "UEQ"
+      - "UMUX / UMUX-Lite"
+      - "CSAT"
+      - "NPS"
+    units: [ "SUS (0–100)", "UEQ scale", "Likert", "NPS" ]
+
+  - id: usability_problems
+    label: "Usability Problems"
+    cluster: ux_satisfaction
+    aliases:
+      - usability_issues
+      - issue_count
+    instruments: []
+    units: [ "count" ]
+    notes: "If severity is rated, include scale."
+
+  # ---------------- Affective & Emotional ----------------
+  - id: engagement_level
+    label: "Engagement"
+    cluster: affective_emotion
+    aliases:
+      - user_engagement
+      - attention_score
+      - engagement_index
+    instruments:
+      - "UES"
+      - "SAM (arousal)"
+    units: [ "Likert", "index" ]
+
+  - id: stress
+    label: "Stress"
+    cluster: affective_emotion
+    aliases:
+      - perceived_stress
+      - strain
+      - frustration
+    instruments:
+      - "PSS"
+      - "NASA-TLX (Frustration)"
+    units: [ "Likert", "VAS" ]
+
+  - id: valence
+    label: "Valence"
+    cluster: affective_emotion
+    aliases:
+      - positive_affect
+      - negative_affect (reverse)
+      - affect_valence
+    instruments:
+      - "SAM (valence)"
+      - "PANAS"
+    units: [ "Likert", "VAS" ]
+
+  # ---------------- Physiological & Biometric ----------------
+  - id: eda_gsr
+    label: "Electrodermal Activity (EDA/GSR)"
+    cluster: physiological_biometric
+    aliases:
+      - gsr
+      - skin_conductance
+      - eda
+    instruments:
+      - "Shimmer GSR"
+      - "Empatica E4"
+    units: [ "µS", "z-score" ]
+
+  - id: hr_hrv
+    label: "Heart Rate / Heart Rate Variability"
+    cluster: physiological_biometric
+    aliases:
+      - heart_rate
+      - hrv
+      - rr_interval
+    instruments:
+      - "Polar H10"
+      - "Empatica E4"
+    units: [ "bpm", "ms", "RMSSD" ]
+
+  - id: pupil_dilation
+    label: "Pupil Dilation"
+    cluster: physiological_biometric
+    aliases:
+      - pupil_size
+    instruments:
+      - "Tobii Pro"
+      - "Pupil Labs"
+    units: [ "mm", "z-score" ]
+
+  - id: eye_tracking
+    label: "Eye-Tracking Metrics"
+    cluster: physiological_biometric
+    aliases:
+      - gaze
+      - fixation_duration
+      - saccade_amplitude
+    instruments:
+      - "Tobii Pro"
+      - "EyeLink"
+    units: [ "ms", "count" ]
+
+  # ---------------- Social & Collaborative ----------------
+  - id: social_presence
+    label: "Social Presence"
+    cluster: social_collaboration
+    aliases:
+      - co_presence
+    instruments:
+      - "Networked Minds Social Presence"
+    units: [ "Likert" ]
+
+  - id: collaboration_quality
+    label: "Collaboration Quality"
+    cluster: social_collaboration
+    aliases:
+      - team_effectiveness
+      - coordination_quality
+    instruments: []
+    units: [ "Likert", "index" ]
+
+  # ---------------- Accessibility & Inclusivity ----------------
+  - id: accessibility_outcome
+    label: "Accessibility Outcome"
+    cluster: accessibility_inclusion
+    aliases:
+      - accessible_use
+      - barrier_count
+      - success_with_AT
+    instruments: []
+    units: [ "count", "Likert" ]
