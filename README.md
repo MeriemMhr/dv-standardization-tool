@@ -202,8 +202,8 @@ Aligned with the UK AI regulatory framework, the tool is classified as a **"supp
 
 *The following represent a selected subset of key academic references that informed the design rationale, methodological approach, and conceptual framing of this project. While not exhaustive, these citations reflect foundational contributions to discussions on reproducibility, open science, and metadata standardization in empirical HCI research:*
 
-* **Goodman, N., & Koelle, M. (2024).** *Changing Lanes Toward Open Science: Envisioning an Open, Transparent Future for Empirical HCI Research*. In *Proceedings of the ACM on Human-Computer Interaction (PACMHCI)*, CHI 2024. [https://doi.org/10.1145/3640792.3675730)](https://doi.org/10.1145/3675730)
-  
+* **Ebel, P., Bazilinskyy, P., Colley, M., Goodridge, C. M., Hock, P., Janssen, C. P., Sandhaus, H., Srinivasan, A. R., & Wintersberger, P. (2024).** *Changing Lanes Toward Open Science: Openness and Transparency in Automotive User Research*. In *Proceedings of the 16th International Conference on Automotive User Interfaces and Interactive Vehicular Applications (AutomotiveUI ’24)*. ACM. [https://doi.org/10.1145/3640792.3675730](https://doi.org/10.1145/3640792.3675730)
+
 * **Wilkinson, M. D., Dumontier, M., Aalbersberg, I. J., et al. (2016).** The FAIR Guiding Principles for scientific data management and stewardship. *Scientific Data*, 3, 160018. [https://doi.org/10.1038/sdata.2016.18](https://doi.org/10.1038/sdata.2016.18)
 
 ---
