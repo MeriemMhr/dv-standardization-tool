@@ -211,7 +211,7 @@ Aligned with the UK AI regulatory framework, the tool is classified as a **"supp
 ## Citation
 If you use this repository or the accompanying tool, please cite:
 
-> Mehri, M. (2025). *Breaking data silos in HCI: A standardized framework and open-source tool for FAIR, reproducible, and cumulative research (MSc dissertation, University College London)*. UCL Interaction Centre. [GitHub Repository](https://github.com/MeriemMhr/dv-standardization-tool)
+> Mehri, M. (2025). *Breaking data silos in HCI: A standardized framework and open-source tool for FAIR, reproducible, and cumulative research (MSc dissertation, University College London)*. UCL Interaction Centre. [GitHub Repository](https://github.com/MeriemMhr/dv-standardization-tool)[Paper](https://drive.google.com/file/d/1ZdetmLvCmw_DEdvhh0JSBjHsCtrKJZII/view?usp=sharing)
 
 
 #### BibTeX
