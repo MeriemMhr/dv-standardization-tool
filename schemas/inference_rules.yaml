@@ -1,0 +1,292 @@
+# Inference Rules for DV Category and Unit Detection
+# Version: 1.0
+# Last Updated: 2026-02-04
+#
+# This file contains heuristic rules for automatically inferring measurement
+# categories and units from DV labels. Rules are applied in priority order:
+# 1. Instrument name matching (highest confidence)
+# 2. Unit markers in parentheses
+# 3. Keyword/suffix/pattern matching
+
+version: "1.0"
+
+category_rules:
+  Time:
+    keywords:
+      - time
+      - duration
+      - latency
+      - delay
+      - speed
+      - rt
+      - reaction
+      - response_time
+    suffixes:
+      - _time
+      - _duration
+      - _latency
+      - _rt
+      - _delay
+    patterns:
+      - "time[\\s_]*(to|for|on|until)"
+      - "(response|reaction)[\\s_]*time"
+      - "(task|trial)[\\s_]*(time|duration)"
+      - "^rt$"
+      - "^(completion|response|decision)[\\s_]*(time|latency)$"
+
+  Accuracy:
+    keywords:
+      - accuracy
+      - error
+      - correct
+      - mistake
+      - precision
+      - recall
+      - f1
+    suffixes:
+      - _accuracy
+      - _error
+      - _errors
+      - _correct
+    patterns:
+      - "error[\\s_]*rate"
+      - "(hit|miss)[\\s_]*rate"
+      - "(true|false)[\\s_]*(positive|negative)"
+      - "accuracy[\\s_]*(%|percent)?"
+
+  Likert:
+    keywords:
+      - tlx
+      - sus
+      - nasa
+      - scale
+      - rating
+      - satisfaction
+      - workload
+      - usability
+      - likert
+      - questionnaire
+      - ueq
+      - attrakdiff
+      - sam
+      - panas
+    suffixes:
+      - _scale
+      - _rating
+      - _score
+      - _likert
+    patterns:
+      - "\\d+[\\s_-]*point"
+      - "(likert|scale)[\\s_]*\\d+"
+      - "(nasa|tlx|sus|ueq)[\\s_-]"
+      - "(mental|physical|temporal)[\\s_]*(demand|load)"
+      - "(perceived|subjective)[\\s_]*"
+
+  Count:
+    keywords:
+      - count
+      - number
+      - frequency
+      - clicks
+      - events
+      - occurrences
+      - total
+      - n_
+    suffixes:
+      - _count
+      - _num
+      - _frequency
+      - _total
+      - _n
+    patterns:
+      - "(number|num|n)[\\s_]*(of)"
+      - "n[\\s_]*(clicks|errors|events|trials)"
+      - "^(click|error|event)[\\s_]*count$"
+      - "total[\\s_]*(clicks|errors|events)"
+
+  Proportion:
+    keywords:
+      - rate
+      - percentage
+      - proportion
+      - ratio
+      - pct
+    suffixes:
+      - _rate
+      - _pct
+      - _percent
+      - _ratio
+      - _proportion
+    patterns:
+      - "(completion|success|failure|error)[\\s_]*rate"
+      - "(%|percent|proportion)"
+      - "\\(0-1\\)"
+      - "\\(0-100\\)"
+
+  Binary:
+    keywords:
+      - success
+      - failure
+      - completed
+      - passed
+      - detected
+      - found
+      - correct_yn
+    suffixes:
+      - _success
+      - _passed
+      - _failed
+      - _detected
+      - _binary
+    patterns:
+      - "(task|trial)[\\s_]*(success|completion|passed)"
+      - "(yes|no)[\\s_]*response"
+      - "(detected|found)[\\s_]*(y|n|yes|no)?"
+      - "^(success|failure|pass|fail)$"
+
+  Physiological:
+    keywords:
+      - eda
+      - gsr
+      - hr
+      - hrv
+      - pupil
+      - gaze
+      - fixation
+      - saccade
+      - blink
+      - ecg
+      - emg
+      - eeg
+      - skin_conductance
+      - heart_rate
+      - galvanic
+    suffixes:
+      - _gsr
+      - _eda
+      - _hrv
+      - _hr
+      - _pupil
+      - _gaze
+    patterns:
+      - "(heart|skin|pupil|eye)[\\s_]"
+      - "(galvanic|conductance|electrodermal)"
+      - "(fixation|saccade|blink)[\\s_]*(duration|count|rate)"
+      - "(rmssd|sdnn|pnn50)"
+
+unit_rules:
+  seconds:
+    patterns:
+      - "\\(s\\)$"
+      - "\\(sec\\)$"
+      - "[\\s_]sec(onds?)?$"
+      - "[\\s_]s$"
+    category: Time
+
+  milliseconds:
+    patterns:
+      - "\\(ms\\)$"
+      - "millisec"
+      - "[\\s_]ms$"
+    category: Time
+
+  minutes:
+    patterns:
+      - "\\(min\\)$"
+      - "minutes?$"
+      - "[\\s_]min$"
+    category: Time
+
+  percentage:
+    patterns:
+      - "\\(%\\)$"
+      - "percent"
+      - "[\\s_]%$"
+      - "\\(0-100\\)"
+    category: Proportion
+
+  proportion:
+    patterns:
+      - "\\(0-1\\)"
+      - "proportion"
+      - "^rate$"
+    category: Proportion
+
+  bpm:
+    patterns:
+      - "bpm"
+      - "beats[\\s_]*per"
+    category: Physiological
+
+  microsiemens:
+    patterns:
+      - "[uµ]s"
+      - "microsiemens"
+      - "µS"
+    category: Physiological
+
+instrument_scales:
+  NASA-TLX:
+    category: Likert
+    scale: "21-point (0-20)"
+    scale_type: ordinal
+    subscales: 6
+    direction: lower_is_better
+    aliases:
+      - nasa_tlx
+      - nasatlx
+      - tlx
+      - task_load_index
+
+  SUS:
+    category: Likert
+    scale: "100-point"
+    scale_type: interval
+    items: 10
+    direction: higher_is_better
+    aliases:
+      - system_usability_scale
+      - sus_score
+
+  UEQ:
+    category: Likert
+    scale: "7-point (-3 to +3)"
+    scale_type: ordinal
+    subscales: 6
+    direction: higher_is_better
+    aliases:
+      - user_experience_questionnaire
+      - ueq_score
+
+  SAM:
+    category: Likert
+    scale: "9-point"
+    scale_type: ordinal
+    dimensions: 3
+    direction: varies
+    aliases:
+      - self_assessment_manikin
+      - sam_valence
+      - sam_arousal
+      - sam_dominance
+
+  PANAS:
+    category: Likert
+    scale: "5-point"
+    scale_type: ordinal
+    subscales: 2
+    direction: varies
+    aliases:
+      - positive_negative_affect
+      - panas_pa
+      - panas_na
+
+  AttrakDiff:
+    category: Likert
+    scale: "7-point"
+    scale_type: ordinal
+    subscales: 4
+    direction: higher_is_better
+    aliases:
+      - attrakdiff
+      - attrakdiff2

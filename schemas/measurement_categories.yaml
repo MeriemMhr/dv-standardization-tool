@@ -1,0 +1,130 @@
+# Measurement Categories Schema for OpenDV-HCI
+# Version: 1.0
+# Last Updated: 2026-02-04
+#
+# This file defines the taxonomy of measurement categories for HCI dependent variables.
+# Each category specifies aggregation strategies, unit conversion factors, and known instruments.
+
+version: "1.0"
+
+categories:
+  Time:
+    description: "Duration or latency measurements"
+    scale_type: ratio
+    default_unit: seconds
+    allowed_units: [s, ms, min, hours]
+    aggregation: mean
+    conversion_factors:
+      ms: 0.001    # to seconds
+      min: 60      # to seconds
+      hours: 3600  # to seconds
+    notes: "Report central tendency and dispersion; convert to common unit for aggregation"
+
+  Accuracy:
+    description: "Correctness and error measurements"
+    scale_type: ratio
+    default_unit: percentage
+    allowed_units: [percentage, proportion, rate]
+    aggregation: weighted_mean
+    conversion_factors:
+      proportion: 100  # to percentage
+    notes: "Distinguish between accuracy (correct) and error rate (incorrect)"
+
+  Count:
+    description: "Discrete occurrence counts"
+    scale_type: ratio
+    default_unit: integer
+    allowed_units: [integer, frequency]
+    aggregation: sum
+    notes: "May be normalized by time or trials for rate calculations"
+
+  Likert:
+    description: "Ordinal rating scales from standardized instruments"
+    scale_type: ordinal
+    default_unit: null  # varies by instrument
+    aggregation: median
+    notes: "Use median for ordinal data; mean acceptable for validated instruments with sufficient items"
+    known_instruments:
+      - name: NASA-TLX
+        scale: "21-point (0-20)"
+        subscales: 6
+        direction: lower_is_better
+        description: "Task Load Index for perceived workload"
+      - name: SUS
+        scale: "100-point (0-100)"
+        items: 10
+        direction: higher_is_better
+        description: "System Usability Scale"
+      - name: UEQ
+        scale: "7-point (-3 to +3)"
+        subscales: 6
+        direction: higher_is_better
+        description: "User Experience Questionnaire"
+      - name: SAM
+        scale: "9-point"
+        dimensions: 3
+        direction: varies
+        description: "Self-Assessment Manikin (Valence, Arousal, Dominance)"
+      - name: PANAS
+        scale: "5-point"
+        subscales: 2
+        direction: varies
+        description: "Positive and Negative Affect Schedule"
+      - name: AttrakDiff
+        scale: "7-point"
+        subscales: 4
+        direction: higher_is_better
+        description: "Pragmatic and hedonic quality assessment"
+
+  Proportion:
+    description: "Ratios and percentages"
+    scale_type: ratio
+    default_unit: percentage
+    allowed_units: [percentage, proportion, ratio]
+    aggregation: weighted_mean
+    conversion_factors:
+      proportion: 100  # to percentage
+    notes: "Use logit or arcsine transformation for proportions near 0 or 1"
+
+  Binary:
+    description: "Dichotomous outcomes"
+    scale_type: nominal
+    default_unit: boolean
+    allowed_units: [boolean, binary_01, success_failure]
+    aggregation: proportion
+    notes: "Aggregate as success rate or proportion; report confidence intervals"
+
+  Continuous:
+    description: "Unbounded numeric measurements"
+    scale_type: ratio
+    default_unit: varies
+    aggregation: mean
+    notes: "Requires unit specification for aggregation; check for normality"
+
+  Physiological:
+    description: "Biometric and physiological signals"
+    scale_type: ratio
+    default_unit: varies
+    aggregation: specialized
+    notes: "Requires baseline correction and domain-specific preprocessing"
+    common_measures:
+      - name: EDA/GSR
+        unit: microsiemens
+        symbol: "µS"
+        description: "Electrodermal activity / Galvanic skin response"
+      - name: Heart Rate
+        unit: beats_per_minute
+        symbol: bpm
+        description: "Heart rate (HR)"
+      - name: HRV (RMSSD)
+        unit: milliseconds
+        symbol: ms
+        description: "Heart rate variability (root mean square of successive differences)"
+      - name: Pupil Diameter
+        unit: millimeters
+        symbol: mm
+        description: "Pupil dilation"
+      - name: Eye Tracking
+        unit: varies
+        symbol: null
+        description: "Fixation duration, saccade velocity, etc."

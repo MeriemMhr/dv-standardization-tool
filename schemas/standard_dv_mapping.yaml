@@ -1,5 +1,5 @@
-version: "2.0"
-updated: "2025-09-07"
+version: "2.1"
+updated: "2026-02-04"
 
 # all `cluster` values must match an ID in thematic_clusters.yaml
 
@@ -9,6 +9,12 @@ dvs:
   - id: task_completion_time
     label: "Task Completion Time"
     cluster: performance
+    measurement:
+      category: Time
+      primary_unit: seconds
+      allowed_units: [s, ms, min]
+      scale_type: ratio
+      direction: lower_is_better
     aliases:
       - time_spent
       - completion_duration
@@ -22,6 +28,12 @@ dvs:
   - id: task_success
     label: "Task Success Rate"
     cluster: performance
+    measurement:
+      category: Binary
+      primary_unit: proportion
+      allowed_units: [proportion, percentage, binary]
+      scale_type: ratio
+      direction: higher_is_better
     aliases:
       - success_rate
       - completion_rate
@@ -33,6 +45,12 @@ dvs:
   - id: error_rate
     label: "Error Rate"
     cluster: performance
+    measurement:
+      category: Accuracy
+      primary_unit: percentage
+      allowed_units: [percentage, proportion, count, rate]
+      scale_type: ratio
+      direction: lower_is_better
     aliases:
       - mistake_ratio
       - failure_rate
@@ -45,6 +63,12 @@ dvs:
   - id: efficiency
     label: "Efficiency"
     cluster: performance
+    measurement:
+      category: Proportion
+      primary_unit: ratio
+      allowed_units: [ratio, rate, percentage]
+      scale_type: ratio
+      direction: higher_is_better
     aliases:
       - throughput
       - keystrokes_per_task
@@ -57,6 +81,12 @@ dvs:
   - id: click_through_rate
     label: "Click-Through Rate"
     cluster: behavioral_interaction
+    measurement:
+      category: Proportion
+      primary_unit: percentage
+      allowed_units: [percentage, proportion, ratio]
+      scale_type: ratio
+      direction: neutral
     aliases:
       - ctr
       - click_ratio
@@ -67,6 +97,12 @@ dvs:
   - id: interaction_events
     label: "Interaction Events"
     cluster: behavioral_interaction
+    measurement:
+      category: Count
+      primary_unit: integer
+      allowed_units: [count, frequency, events_per_min]
+      scale_type: ratio
+      direction: neutral
     aliases:
       - clicks
       - taps
@@ -78,6 +114,12 @@ dvs:
   - id: retention_time
     label: "Retention / Dwell Time"
     cluster: behavioral_interaction
+    measurement:
+      category: Time
+      primary_unit: seconds
+      allowed_units: [s, ms, min]
+      scale_type: ratio
+      direction: higher_is_better
     aliases:
       - dwell_time
       - session_duration
@@ -88,10 +130,18 @@ dvs:
   - id: mental_effort
     label: "Mental Effort"
     cluster: cognitive_load
+    measurement:
+      category: Likert
+      primary_unit: "21-point (0-20)"
+      allowed_units: ["21-point", "Likert", "VAS"]
+      scale_type: ordinal
+      direction: lower_is_better
     aliases:
       - cognitive_load
       - mental_load
       - workload_rating
+      - tlx_mental_demand
+      - nasa_tlx_mental
     instruments:
       - "NASA-TLX (Global or Subscales)"
       - "Paas Scale"
@@ -101,6 +151,12 @@ dvs:
   - id: situational_awareness
     label: "Situational Awareness"
     cluster: cognitive_load
+    measurement:
+      category: Likert
+      primary_unit: score
+      allowed_units: [score, Likert]
+      scale_type: ordinal
+      direction: higher_is_better
     aliases:
       - sa
     instruments:
@@ -111,11 +167,19 @@ dvs:
   - id: user_satisfaction
     label: "User Satisfaction"
     cluster: ux_satisfaction
+    measurement:
+      category: Likert
+      primary_unit: "7-point"
+      allowed_units: ["5-point", "7-point", "100-point", "Likert"]
+      scale_type: ordinal
+      direction: higher_is_better
     aliases:
       - satisfaction_score
       - satisfaction_rating
       - user_feedback
       - perceived_quality
+      - sus_score
+      - system_usability_scale
     instruments:
       - "SUS"
       - "UEQ"
@@ -127,6 +191,12 @@ dvs:
   - id: usability_problems
     label: "Usability Problems"
     cluster: ux_satisfaction
+    measurement:
+      category: Count
+      primary_unit: integer
+      allowed_units: [count, integer]
+      scale_type: ratio
+      direction: lower_is_better
     aliases:
       - usability_issues
       - issue_count
@@ -138,6 +208,12 @@ dvs:
   - id: engagement_level
     label: "Engagement"
     cluster: affective_emotion
+    measurement:
+      category: Likert
+      primary_unit: "Likert"
+      allowed_units: ["5-point", "7-point", "Likert", "index"]
+      scale_type: ordinal
+      direction: higher_is_better
     aliases:
       - user_engagement
       - attention_score
@@ -150,6 +226,12 @@ dvs:
   - id: stress
     label: "Stress"
     cluster: affective_emotion
+    measurement:
+      category: Likert
+      primary_unit: "Likert"
+      allowed_units: ["Likert", "VAS"]
+      scale_type: ordinal
+      direction: lower_is_better
     aliases:
       - perceived_stress
       - strain
@@ -162,10 +244,19 @@ dvs:
   - id: valence
     label: "Valence"
     cluster: affective_emotion
+    measurement:
+      category: Likert
+      primary_unit: "9-point (SAM)"
+      allowed_units: ["9-point", "5-point", "Likert", "VAS"]
+      scale_type: ordinal
+      direction: higher_is_better
     aliases:
       - positive_affect
-      - negative_affect (reverse)
+      - negative_affect
       - affect_valence
+      - sam_valence
+      - panas_pa
+      - panas_na
     instruments:
       - "SAM (valence)"
       - "PANAS"
@@ -175,10 +266,17 @@ dvs:
   - id: eda_gsr
     label: "Electrodermal Activity (EDA/GSR)"
     cluster: physiological_biometric
+    measurement:
+      category: Physiological
+      primary_unit: microsiemens
+      allowed_units: [µS, microsiemens, z-score]
+      scale_type: ratio
+      direction: neutral
     aliases:
       - gsr
       - skin_conductance
       - eda
+      - galvanic_skin_response
     instruments:
       - "Shimmer GSR"
       - "Empatica E4"
@@ -187,10 +285,17 @@ dvs:
   - id: hr_hrv
     label: "Heart Rate / Heart Rate Variability"
     cluster: physiological_biometric
+    measurement:
+      category: Physiological
+      primary_unit: bpm
+      allowed_units: [bpm, ms, RMSSD, SDNN]
+      scale_type: ratio
+      direction: neutral
     aliases:
       - heart_rate
       - hrv
       - rr_interval
+      - hr
     instruments:
       - "Polar H10"
       - "Empatica E4"
@@ -199,8 +304,15 @@ dvs:
   - id: pupil_dilation
     label: "Pupil Dilation"
     cluster: physiological_biometric
+    measurement:
+      category: Physiological
+      primary_unit: millimeters
+      allowed_units: [mm, millimeters, z-score]
+      scale_type: ratio
+      direction: neutral
     aliases:
       - pupil_size
+      - pupil_diameter
     instruments:
       - "Tobii Pro"
       - "Pupil Labs"
@@ -209,10 +321,17 @@ dvs:
   - id: eye_tracking
     label: "Eye-Tracking Metrics"
     cluster: physiological_biometric
+    measurement:
+      category: Time
+      primary_unit: milliseconds
+      allowed_units: [ms, milliseconds, count]
+      scale_type: ratio
+      direction: neutral
     aliases:
       - gaze
       - fixation_duration
       - saccade_amplitude
+      - gaze_fixation
     instruments:
       - "Tobii Pro"
       - "EyeLink"
@@ -222,8 +341,15 @@ dvs:
   - id: social_presence
     label: "Social Presence"
     cluster: social_collaboration
+    measurement:
+      category: Likert
+      primary_unit: "Likert"
+      allowed_units: ["5-point", "7-point", "Likert"]
+      scale_type: ordinal
+      direction: higher_is_better
     aliases:
       - co_presence
+      - copresence
     instruments:
       - "Networked Minds Social Presence"
     units: [ "Likert" ]
@@ -231,6 +357,12 @@ dvs:
   - id: collaboration_quality
     label: "Collaboration Quality"
     cluster: social_collaboration
+    measurement:
+      category: Likert
+      primary_unit: "Likert"
+      allowed_units: ["Likert", "index"]
+      scale_type: ordinal
+      direction: higher_is_better
     aliases:
       - team_effectiveness
       - coordination_quality
@@ -241,6 +373,12 @@ dvs:
   - id: accessibility_outcome
     label: "Accessibility Outcome"
     cluster: accessibility_inclusion
+    measurement:
+      category: Binary
+      primary_unit: success_failure
+      allowed_units: [success_failure, count, Likert]
+      scale_type: nominal
+      direction: higher_is_better
     aliases:
       - accessible_use
       - barrier_count
