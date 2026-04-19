@@ -1,0 +1,11 @@
+study_name,dataset_url,source_type,domain,task,notes
+roads_chi25,https://github.com/M-Colley/roads-chi25-data,github_repo,automated-driving,road-user interaction,Existing GitHub example dataset
+ehmi_optimization_chi25,https://github.com/M-Colley/ehmi-optimization-chi25-data,github_repo,automated-driving,eHMI optimization,Existing GitHub example dataset
+osf_cwd6h,https://osf.io/cwd6h/overview,osf_project,automated-driving,pedestrian trust,Existing OSF example dataset
+road_bumps_touch,https://github.com/interactionlab/Touch-Interaction-with-Road-Bumps/tree/master/data,github_repo,haptics,touch interaction with road bumps,Scoped GitHub tree example with CSV and PKL files
+fourtu_critical_ehmi,https://data.4tu.nl/articles/_/20224281,web_dataset,automated-driving,critical driver-pedestrian encounters,4TU landing-page example that downloads a ZIP archive
+3d_display_comp_vehicle,https://github.com/M-Colley/3d-display-comp-vehicle,github_repo,automated-driving,3D display UX in AVs,TLX SART Trust Understanding Perceived Safety (N=15 within-subject)
+longitudinal_usa_germany_ehmi,https://github.com/M-Colley/longitudinal_usa_germany_eHMI_comparison,github_repo,automated-driving,eHMI longitudinal USA vs Germany,TLX Trust Understanding UEQ Perceived Safety (N=52 two substudies)
+ehmi_for_all_chi26,https://github.com/M-Colley/ehmi-for-all-chi26-data,github_repo,automated-driving,eHMI for pedestrians drivers cyclists,TLX SUS AOA Trust Perceived Safety (CHI 2026)
+fact_av,https://github.com/M-Colley/FACT-AV,github_repo,automated-driving,AV interaction factors,Trust acceptance factors for automated vehicles
+acm_chi26_3790738,https://dl.acm.org/doi/suppl/10.1145/3772318.3790738/suppl_file/3772318.3790738-supplemental-material-1.zip,web_dataset,hci,CHI 2026 paper supplemental material,"ACM DL supplemental ZIP (DOI 10.1145/3772318.3790738). ACM serves this behind a Cloudflare challenge, so automated downloads are not possible; the runner will report it as access_restricted. Download manually from https://dl.acm.org/doi/10.1145/3772318.3790738 and re-ingest via source_type: local_path if needed."

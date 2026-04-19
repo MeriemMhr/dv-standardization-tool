@@ -1,0 +1,10 @@
+# Source-specific column mapping for osf_cwd6h
+# DOI: 10.1145/3706598.3713762
+#
+# In this dataset, ArduinoData1 encodes Perceived Risk on a 1–100 VAS.
+# This overrides the generic sensor mapping (sensor_arduino_data_1).
+
+ArduinoData1: perceived_risk
+arduino_data_1: perceived_risk
+perceivedRisk: perceived_risk
+perceived_risk: perceived_risk

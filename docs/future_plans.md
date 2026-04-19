@@ -13,3 +13,9 @@ Improved visualization capabilities are envisioned to assist with both developme
 ## UI Roadmap
 
 While the current project is backend-focused, an optional frontend layer is being prototyped using Streamlit. The goal is to offer a lightweight, interactive dashboard (`ui/app.py`) for research users who prefer visual or no-code interfaces. This includes support for drag-and-drop dataset uploads, downloadable output previews, and configuration of schema mappings. Styling is handled via a minimal CSS layer (`ui/assets/style.css`), and future iterations will explore themes such as dark mode. These interface features, while not core to the thesis, serve to demonstrate the extensibility and adoption potential of the tool in open research environments.
+
+## Analysis Roadmap
+
+- **R parity for multi-study analysis.** Ship an `analyses/multi_study_analysis.R` that mirrors the Python script so users can run DV overlap, harmonized summaries, and `metafor`-style random-effects pooling from R directly. Until then, users can load `harmonized_dv_summary.csv` into their preferred R meta-analysis package.
+- **Forest plots annotated with provenance.** Highlight pooled estimates whose `includes_llm_deduced` flag is true, so readers can discount accordingly.
+- **Publication-ready effect tables.** An export path that writes LaTeX/HTML summaries from `meta_analysis_summary.csv` plus its `_llm_excluded` sibling.

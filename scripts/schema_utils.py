@@ -223,7 +223,7 @@ def validate_measurement_metadata(measurement: Dict) -> List[str]:
             errors.append(f"Missing required field: {field}")
 
     # Validate category values
-    valid_categories = ['Time', 'Accuracy', 'Count', 'Likert', 'Proportion', 'Binary', 'Continuous', 'Physiological']
+    valid_categories = ['Time', 'Accuracy', 'Count', 'Likert', 'Proportion', 'Binary', 'Continuous', 'Physiological', 'Score']
     if 'category' in measurement and measurement['category'] not in valid_categories:
         errors.append(f"Invalid category: {measurement['category']}. Must be one of {valid_categories}")
 

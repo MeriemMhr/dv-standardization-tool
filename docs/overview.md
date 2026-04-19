@@ -16,5 +16,12 @@ The initiative aligns with SDG 12 (Responsible Consumption and Production) by pr
 - **Case study**: Demonstrate the interoperability potential of the tool via sample transformations.
 - **Long-term impact**: Foster more reproducible and FAIR-aligned HCI research practices.
 
-## Status (07.25)
-Currently in the prototyping phase; schema design complete and initial dataset mappings underway.
+## Status
+The core tooling is in active use:
+- Schema-driven single-file standardization (`scripts/convert_dv.py`).
+- Manifest-driven batch standardization with LLM fallback (`scripts/run_batch_standardization.py`).
+- Catalog-driven orchestration that runs standardization + cross-study meta-analysis from a spreadsheet of dataset URLs (`scripts/run_catalog_meta_analysis.py`).
+- Multi-study meta-analysis with provenance-aware sensitivity runs (`analyses/multi_study_analysis.py`).
+- Streamlit UI for single-file standardization and catalog exploration (`ui/app.py`).
+
+See `docs/changelog.md` for dated updates and `docs/future_plans.md` for roadmap items (including an R parity of the multi-study analysis).

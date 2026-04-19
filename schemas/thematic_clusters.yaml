@@ -1,0 +1,50 @@
+# Thematic cluster definitions for OpenDV-HCI
+# All cluster IDs referenced in standard_dv_mapping.yaml must appear here.
+# Add new clusters here before adding DVs that reference them.
+version: "1.0"
+
+clusters:
+  - id: performance
+    label: "Task Performance"
+    description: "Objective task outcomes: time, accuracy, errors, efficiency."
+    color: "#4CAF50"
+
+  - id: behavioral_interaction
+    label: "Behavioral Interaction"
+    description: "User interaction patterns: clicks, keystrokes, navigation, gaze."
+    color: "#2196F3"
+
+  - id: cognitive_load
+    label: "Cognitive Load"
+    description: "Mental workload and effort: NASA-TLX, subjective ratings."
+    color: "#FF9800"
+
+  - id: affective_emotion
+    label: "Affective & Emotional Response"
+    description: "Emotions, affect, arousal, valence, acceptance."
+    color: "#E91E63"
+
+  - id: ux_satisfaction
+    label: "UX & Satisfaction"
+    description: "Usability, satisfaction, user experience quality."
+    color: "#9C27B0"
+
+  - id: physiological_biometric
+    label: "Physiological & Biometric"
+    description: "Heart rate, EEG, GSR, pupil dilation, eye-tracking metrics."
+    color: "#00BCD4"
+
+  - id: social_collaboration
+    label: "Social & Collaboration"
+    description: "Social presence, awareness, communication quality."
+    color: "#795548"
+
+  - id: accessibility_inclusion
+    label: "Accessibility & Inclusion"
+    description: "Accessibility outcomes, assistive technology effectiveness."
+    color: "#607D8B"
+
+  - id: safety_trust
+    label: "Safety & Trust"
+    description: "Trust, perceived safety, situation awareness, automation acceptance."
+    color: "#F44336"

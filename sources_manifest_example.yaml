@@ -1,0 +1,146 @@
+# Example source manifest for scripts/run_batch_standardization.py
+# Includes public GitHub, OSF, and web-hosted dataset examples.
+sources:
+  - source_id: roads_chi25
+    source_type: github_repo
+    location: https://github.com/M-Colley/roads-chi25-data
+    ref: main
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+      - "**/*.tsv"
+    # Exclude selected files and folder trees from ingestion.
+    exclude_globs:
+      - "**/ClearedLogs/**"
+
+  - source_id: ehmi_optimization_chi25
+    source_type: github_repo
+    location: https://github.com/M-Colley/ehmi-optimization-chi25-data
+    ref: main
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+      - "**/*.tsv"
+    # Exclude selected files and folder trees from ingestion.
+    exclude_globs:
+      - "**/ExecutionTimes.csv"
+      - "**/first upload/**"
+      - "**/last year/**"
+      - "**/ehmi-optimization-chi25-demographic-data.csv"
+
+  - source_id: osf_cwd6h
+    source_type: osf_project
+    location: https://osf.io/cwd6h/overview
+    # Optional LLM context hints for sources whose publication metadata is not
+    # clearly exposed inside the downloaded repository itself.
+    publication_doi: 10.1145/3706598.3713762
+    # publication_pdf_url: https://example.com/paper.pdf
+    # llm_context: "Study investigates pedestrian trust and acceptance of eHMIs."
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+      - "**/*.tsv"
+    extract_archives: true
+    archive_max_depth: 3
+    use_llm_deduction: true
+    llm_models:
+      - Qwen/Qwen3.5-4B
+      - microsoft/Phi-4-mini-instruct
+
+  - source_id: road_bumps_touch
+    source_type: github_repo
+    location: https://github.com/interactionlab/Touch-Interaction-with-Road-Bumps/tree/master/data
+    include_globs:
+      - "**/*.csv"
+      - "**/*.pkl"
+      - "**/*.pickle"
+    use_llm_deduction: false
+
+  - source_id: fourtu_critical_ehmi
+    source_type: web_dataset
+    location: https://data.4tu.nl/articles/_/20224281
+    publication_doi: 10.4121/20224281.v2
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+      - "**/*.tsv"
+      - "**/*.pkl"
+      - "**/*.pickle"
+    extract_archives: true
+    archive_max_depth: 3
+
+  - source_id: 3d_display_comp_vehicle
+    source_type: github_repo
+    location: https://github.com/M-Colley/3d-display-comp-vehicle
+    ref: main
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+    llm_context: "Study on 3D display technologies (LumePad, LookingGlass, 2D) in automated vehicles. DVs: TLX1, SART, TiA Trust, Understanding, Perceived Safety."
+
+  - source_id: longitudinal_usa_germany_ehmi
+    source_type: github_repo
+    location: https://github.com/M-Colley/longitudinal_usa_germany_eHMI_comparison
+    ref: main
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+    exclude_globs:
+      - "**/LoggingEyeTracking*"
+      - "**/LoggingPosition*"
+      - "**/LoggingTotal*"
+      - "**/position_all*"
+      - "**/DemoData*"
+      - "**/temp_dataframe*"
+    llm_context: "Longitudinal USA/Germany eHMI comparison. DVs: TLX1 (mental demand), Trust (TiA), Understanding, UEQ-S, Perceived Safety."
+
+  - source_id: ehmi_for_all_chi26
+    source_type: github_repo
+    location: https://github.com/M-Colley/ehmi-for-all-chi26-data
+    ref: main
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+    exclude_globs:
+      - "**/plots/**"
+    llm_context: "eHMI effects on pedestrians, drivers, cyclists in VR (CHI 2026). DVs: TLX1, SUS, AOA Usefulness/Satisfying, Trust, Perceived Safety."
+
+  - source_id: fact_av
+    source_type: github_repo
+    location: https://github.com/M-Colley/FACT-AV
+    ref: main
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+    llm_context: "FACT-AV study on trust and acceptance factors for automated vehicles."
+
+  # ACM DL supplemental material for CHI 2026 paper (DOI 10.1145/3772318.3790738).
+  # NOTE: ACM Digital Library serves supplemental files behind a Cloudflare
+  # challenge, so automated downloads via urllib will be blocked. The batch
+  # runner now detects this and records the source as status `access_restricted`
+  # rather than `failed`. To actually ingest the dataset, download the archive
+  # manually from https://dl.acm.org/doi/10.1145/3772318.3790738 and replace
+  # this entry with a `source_type: local_path` pointing at the extracted
+  # directory.
+  - source_id: acm_chi26_3790738
+    source_type: web_dataset
+    location: https://dl.acm.org/doi/suppl/10.1145/3772318.3790738/suppl_file/3772318.3790738-supplemental-material-1.zip
+    publication_doi: 10.1145/3772318.3790738
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+      - "**/*.tsv"
+      - "**/*.pkl"
+      - "**/*.pickle"
+    extract_archives: true
+    archive_max_depth: 3
+    llm_context: "CHI 2026 paper supplemental material (ACM DOI 10.1145/3772318.3790738)."

@@ -1,0 +1,9 @@
+# Source-specific column mapping for FACT-AV
+# GitHub: https://github.com/M-Colley/FACT-AV
+#
+# In this dataset, `understanding_rating` is the sART Understanding
+# subscale (Taylor 1990), scored 0–20.  It must NOT be conflated with
+# the eHMI signal-comprehension item (understanding_rating, 1–5) used in
+# the eHMI studies.  Renaming here ensures the two constructs remain
+# distinct in downstream meta-analysis.
+understanding_rating: sart_understanding

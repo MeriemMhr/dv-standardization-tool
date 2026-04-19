@@ -1,0 +1,32 @@
+version: "1.0"
+schema_type: detection
+updated: "2026-03-06"
+
+# Object-detection / bounding-box schema used by batch standardization.
+dvs:
+  - id: detection_video_id
+    aliases: [video, video_id]
+
+  - id: detection_frame_index
+    aliases: [frame, frame_id]
+
+  - id: detection_object_id
+    aliases: [object_id, objectid]
+
+  - id: detection_class_label
+    aliases: [class, bboxclass, class_label]
+
+  - id: detection_bbox_x
+    aliases: [x, bbox_x]
+
+  - id: detection_bbox_y
+    aliases: [y, bbox_y]
+
+  - id: detection_bbox_width
+    aliases: [width, bbox_width]
+
+  - id: detection_bbox_height
+    aliases: [height, bbox_height]
+
+  - id: detection_confidence
+    aliases: [confidence, bbox_confidence]

@@ -1,0 +1,41 @@
+version: "1.0"
+schema_type: metadata
+updated: "2026-03-06"
+
+# Process / metadata schema used by batch standardization.
+dvs:
+  - id: meta_timestamp
+    aliases: [Timestamp, timestamp, time_stamp]
+
+  - id: meta_phase
+    aliases: [Phase, phase]
+
+  - id: meta_run
+    aliases: [Run, run]
+
+  - id: meta_is_pareto
+    aliases: [IsPareto, isPareto, is_pareto]
+
+  - id: meta_frame_number
+    aliases: [frameNumber, frame_number]
+
+  - id: meta_capture_time
+    aliases: [captureTime, capture_time]
+
+  - id: meta_log_time
+    aliases: [LogTime, log_time]
+
+  - id: meta_video_frame
+    aliases: [VideoFrame, video_frame]
+
+  - id: meta_hmd_position
+    aliases: [HMDPosition, hmd_position]
+
+  - id: meta_hmd_rotation
+    aliases: [HMDRotation, hmd_rotation]
+
+  - id: meta_source_index
+    aliases: ["Unnamed: 0", unnamed_0]
+
+  - id: meta_source_index_aux
+    aliases: ["Unnamed: 1", unnamed_1]

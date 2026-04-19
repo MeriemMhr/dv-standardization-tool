@@ -1,0 +1,106 @@
+# Dataset type profiles for OpenDV-HCI batch standardization
+# Each profile defines how to auto-detect a dataset type and which schema to use.
+# Add new types here without modifying Python code.
+version: "1.0"
+
+dataset_types:
+  - id: object_detection
+    label: "Object Detection"
+    description: "Bounding-box output from YOLO or similar detectors."
+    path_hints:
+      - yolo
+      - bbox
+      - bounding_box
+      - detection
+    markers:
+      - video
+      - frame
+      - objectid
+      - class
+      - x
+      - y
+      - width
+      - height
+      - confidence
+    min_marker_count: 5
+    min_marker_ratio: 0.30
+    schema: standard_detection_mapping.yaml
+    priority: 10   # higher = checked first
+
+  - id: sensor_stream
+    label: "Sensor Stream"
+    description: "Continuous sensor data: eye-tracking, physiological, motion."
+    path_hints: []
+    markers:
+      - gazeforward
+      - gazeorigin
+      - leftpupildiameterinmm
+      - rightpupildiameterinmm
+      - leftirisdiameterinmm
+      - rightirisdiameterinmm
+      - projectedx
+      - projectedy
+      - quadlocalx
+      - quadlocaly
+      - pixelx
+      - pixely
+      - gazeray
+      - eyeopenness
+      - headposition
+      - headrotation
+      - hmdposition
+      - hmdrotation
+      - accelerometer
+      - gyroscope
+      - arduinodata1
+      - arduinodata2
+      - arduinodata3
+      - focusdistance
+    min_marker_count: 3
+    min_marker_ratio: 0.20
+    schema: standard_sensor_mapping.yaml
+    priority: 9
+
+  - id: questionnaire
+    label: "Questionnaire"
+    description: "Survey or questionnaire data with Likert or rating items."
+    path_hints:
+      - questionnaire
+      - survey
+      - likert
+      - rating
+    markers: []   # uses question_detection logic (long names, '?' chars)
+    min_question_hits: 3
+    min_question_ratio: 0.50   # fraction of columns that look like questions
+    schema: standard_dv_mapping.yaml
+    priority: 7
+
+  - id: process_log
+    label: "Process Log"
+    description: "Event logs, trial sequences, timestamps, experimental phases."
+    path_hints: []
+    markers:
+      - timestamp
+      - phase
+      - run
+      - ispareto
+      - framenumber
+      - hmdposition
+      - hmdrotation
+      - trialnumber
+      - eventtype
+      - logtime
+    min_marker_count: 3
+    min_marker_ratio: 0.30
+    schema: standard_metadata_mapping.yaml
+    priority: 5
+
+  - id: results_table
+    label: "Results Table"
+    description: "Aggregated study results: per-participant or per-condition summary statistics."
+    path_hints: []
+    markers: []
+    min_marker_count: 0
+    min_marker_ratio: 0.0
+    schema: standard_dv_mapping.yaml
+    priority: 0   # fallback — lowest priority

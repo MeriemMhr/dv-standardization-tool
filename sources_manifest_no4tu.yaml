@@ -1,0 +1,115 @@
+# Source manifest without fourtu_critical_ehmi (stalls on download)
+sources:
+  - source_id: roads_chi25
+    source_type: github_repo
+    location: https://github.com/M-Colley/roads-chi25-data
+    ref: main
+    publication_doi: 10.1145/3706598.3713476
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+      - "**/*.tsv"
+    exclude_globs:
+      - "**/ClearedLogs/**"
+    use_llm_deduction: true
+
+  - source_id: ehmi_optimization_chi25
+    source_type: github_repo
+    location: https://github.com/M-Colley/ehmi-optimization-chi25-data
+    ref: main
+    publication_doi: 10.1145/3706598.3714187
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+      - "**/*.tsv"
+    exclude_globs:
+      - "**/ExecutionTimes.csv"
+      - "**/HypervolumePerEvaluation.csv"
+      - "**/first upload/**"
+      - "**/last year/**"
+      - "**/ehmi-optimization-chi25-demographic-data.csv"
+    use_llm_deduction: true
+
+  - source_id: osf_cwd6h
+    source_type: osf_project
+    location: https://osf.io/cwd6h/overview
+    publication_doi: 10.1145/3706598.3713762
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+      - "**/*.tsv"
+    extract_archives: true
+    archive_max_depth: 3
+    use_llm_deduction: true
+    mapping_path: schemas/osf_cwd6h_mapping.yaml
+    llm_context: "ArduinoData1 encodes Perceived Risk on a 1-100 VAS scale."
+
+  - source_id: road_bumps_touch
+    source_type: github_repo
+    location: https://github.com/interactionlab/Touch-Interaction-with-Road-Bumps/tree/master/data
+    publication_doi: 10.1145/3239060.3239071
+    include_globs:
+      - "**/*.csv"
+      - "**/*.pkl"
+      - "**/*.pickle"
+    use_llm_deduction: true
+
+  - source_id: 3d_display_comp_vehicle
+    source_type: github_repo
+    location: https://github.com/M-Colley/3d-display-comp-vehicle
+    ref: main
+    publication_doi: 10.1145/3626705.3627786
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+    llm_context: "Study on 3D display technologies (LumePad, LookingGlass, 2D) in automated vehicles. DVs: TLX1, SART, TiA Trust, Understanding, Perceived Safety."
+    use_llm_deduction: true
+
+  - source_id: longitudinal_usa_germany_ehmi
+    source_type: github_repo
+    location: https://github.com/M-Colley/longitudinal_usa_germany_eHMI_comparison
+    ref: main
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+    exclude_globs:
+      - "**/LoggingEyeTracking*"
+      - "**/LoggingPosition*"
+      - "**/LoggingTotal*"
+      - "**/position_all*"
+      - "**/DemoData*"
+      - "**/temp_dataframe*"
+    llm_context: "Longitudinal USA/Germany eHMI comparison. DVs: TLX1 (mental demand), Trust (TiA), Understanding, UEQ-S, Perceived Safety."
+    use_llm_deduction: true
+
+  - source_id: ehmi_for_all_chi26
+    source_type: github_repo
+    location: https://github.com/M-Colley/ehmi-for-all-chi26-data
+    ref: main
+    publication_doi: 10.1145/3772318.3790585
+    include_globs:
+      - "**/*.csv"
+      - "**/*.xlsx"
+      - "**/*.xls"
+    exclude_globs:
+      - "**/plots/**"
+    llm_context: "eHMI effects on pedestrians, drivers, cyclists in VR (CHI 2026). DVs: TLX1, SUS, AOA Usefulness/Satisfying, Trust, Perceived Safety."
+    use_llm_deduction: true
+
+  - source_id: fact_av
+    source_type: github_repo
+    location: https://github.com/M-Colley/FACT-AV
+    ref: main
+    include_globs:
+      - "data/all_combined_prepared.xlsx"
+    mapping_path: schemas/fact_av_mapping.yaml
+    llm_context: >
+      FACT-AV study on trust and acceptance factors for automated vehicles.
+      understanding_rating is the sART Understanding subscale (0–20), NOT an
+      eHMI comprehension item — it is mapped to sart_understanding.
+    use_llm_deduction: true

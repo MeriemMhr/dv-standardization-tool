@@ -1,0 +1,114 @@
+version: "1.0"
+schema_type: sensor
+updated: "2026-03-05"
+
+# Sensor-stream canonicalization schema used by batch standardization.
+# These are non-DV measurement channels (e.g., eye-tracking, telemetry, device feeds).
+dvs:
+  - id: eye_gaze_forward
+    aliases: [gaze.forward, gaze_forward]
+
+  - id: eye_gaze_origin
+    aliases: [gaze.origin, gaze_origin]
+
+  - id: eye_inter_pupillary_distance_mm
+    aliases: [interPupillaryDistanceInMM, inter_pupillary_distance_mm]
+
+  - id: eye_left_status
+    aliases: [leftStatus, left_status]
+
+  - id: eye_left_forward
+    aliases: [left.forward, left_forward]
+
+  - id: eye_left_origin
+    aliases: [left.origin, left_origin]
+
+  - id: eye_left_pupil_iris_diameter_ratio
+    aliases: [leftPupilIrisDiameterRatio, left_pupil_iris_diameter_ratio]
+
+  - id: eye_left_pupil_diameter_mm
+    aliases: [leftPupilDiameterInMM, left_pupil_diameter_mm]
+
+  - id: eye_left_iris_diameter_mm
+    aliases: [leftIrisDiameterInMM, left_iris_diameter_mm]
+
+  - id: eye_right_status
+    aliases: [rightStatus, right_status]
+
+  - id: eye_right_forward
+    aliases: [right.forward, right_forward]
+
+  - id: eye_right_origin
+    aliases: [right.origin, right_origin]
+
+  - id: eye_right_pupil_iris_diameter_ratio
+    aliases: [rightPupilIrisDiameterRatio, right_pupil_iris_diameter_ratio]
+
+  - id: eye_right_pupil_diameter_mm
+    aliases: [rightPupilDiameterInMM, right_pupil_diameter_mm]
+
+  - id: eye_right_iris_diameter_mm
+    aliases: [rightIrisDiameterInMM, right_iris_diameter_mm]
+
+  - id: eye_diameter_mm
+    aliases: [DiameterInMM, diameterInMM, diameter_mm]
+
+  - id: eye_focus_distance
+    aliases: [focusDistance, focus_distance]
+
+  - id: eye_focus_stability
+    aliases: [focusStability, focus_stability]
+
+  - id: eye_projected_x
+    aliases: [projectedX, projected_x]
+
+  - id: eye_projected_y
+    aliases: [projectedY, projected_y]
+
+  - id: eye_quad_local_x
+    aliases: [quadLocalX, quad_local_x]
+
+  - id: eye_quad_local_y
+    aliases: [quadLocalY, quad_local_y]
+
+  - id: eye_quad_norm_x
+    aliases: [quadNormX, quad_norm_x]
+
+  - id: eye_quad_norm_y
+    aliases: [quadNormY, quad_norm_y]
+
+  - id: eye_projected_x_left
+    aliases: [projectedX_left, projected_x_left]
+
+  - id: eye_projected_y_left
+    aliases: [projectedY_left, projected_y_left]
+
+  - id: eye_projected_x_right
+    aliases: [projectedX_right, projected_x_right]
+
+  - id: eye_projected_y_right
+    aliases: [projectedY_right, projected_y_right]
+
+  - id: eye_scaled_gaze_forward
+    aliases: [scaledGazeForward, scaled_gaze_forward]
+
+  - id: eye_scaled_left_forward
+    aliases: [scaledLeftForward, scaled_left_forward]
+
+  - id: eye_scaled_right_forward
+    aliases: [scaledRightForward, scaled_right_forward]
+
+  - id: sensor_arduino_data_1
+    aliases: [ArduinoData1, arduino_data_1]
+
+  - id: sensor_arduino_data_2
+    aliases: [ArduinoData2, arduino_data_2]
+
+  - id: sensor_arduino_data_3
+    aliases: [ArduinoData3, arduino_data_3]
+
+  - id: sensor_pixel_x
+    aliases: [PixelX, pixelX, pixel_x]
+
+  - id: sensor_pixel_y
+    aliases: [PixelY, pixelY, pixel_y]

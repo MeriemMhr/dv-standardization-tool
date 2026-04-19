@@ -10,13 +10,22 @@ import re
 import yaml
 from pathlib import Path
 from typing import List, Optional, Tuple, Dict
-from measurement_types import (
-    MeasurementMeta,
-    MeasurementCategory,
-    ScaleType,
-    Direction,
-    CATEGORY_SCALE_TYPES
-)
+try:
+    from scripts.measurement_types import (
+        MeasurementMeta,
+        MeasurementCategory,
+        ScaleType,
+        Direction,
+        CATEGORY_SCALE_TYPES,
+    )
+except ImportError:
+    from measurement_types import (
+        MeasurementMeta,
+        MeasurementCategory,
+        ScaleType,
+        Direction,
+        CATEGORY_SCALE_TYPES,
+    )
 
 
 def load_inference_rules(
@@ -36,8 +45,18 @@ def load_inference_rules(
         current_dir = Path(__file__).parent
         rules_path = current_dir.parent / "schemas" / "inference_rules.yaml"
 
-    with open(rules_path, 'r') as f:
-        rules = yaml.safe_load(f)
+    try:
+        with open(rules_path, 'r', encoding='utf-8') as f:
+            rules = yaml.safe_load(f)
+    except yaml.YAMLError as exc:
+        raise ValueError(
+            f"Failed to parse inference rules YAML at '{rules_path}': {exc}"
+        ) from exc
+
+    if not isinstance(rules, dict):
+        raise ValueError(
+            f"Inference rules file '{rules_path}' must contain a YAML mapping at the top level."
+        )
 
     return rules
 
@@ -270,10 +289,16 @@ def get_measurement_from_schema(
         current_dir = Path(__file__).parent
         schema_path = current_dir.parent / "schemas" / "standard_dv_mapping.yaml"
 
-    with open(schema_path, 'r') as f:
-        schema = yaml.safe_load(f)
+    try:
+        with open(schema_path, 'r', encoding='utf-8') as f:
+            schema = yaml.safe_load(f)
+    except (yaml.YAMLError, OSError):
+        return None
 
-    for dv in schema.get('dvs', []):
+    if not isinstance(schema, dict):
+        return None
+
+    for dv in schema.get('dvs', []) or []:
         if dv.get('id') == dv_id:
             measurement = dv.get('measurement', {})
             if measurement:
