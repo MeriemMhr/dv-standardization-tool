@@ -7,7 +7,7 @@
 ---
 
 ## Overview
-This repository accompanies the MSc research project titled *"Standardizing Reporting of Dependent Variables in HCI Research: A Naming Scheme and Conversion Tool for Open Data"* (Project Code: P09). The project addresses the pressing challenge of methodological fragmentation and inconsistent naming conventions of dependent variables (DVs) across empirical Human-Computer Interaction (HCI) research.  
+This repository accompanies the MSc dissertation *"Breaking Data Silos in HCI: A Standardized Framework and Open-Source Tool for FAIR, Reproducible, and Cumulative Research"* (Mehri, 2025), submitted to the Department of Computer Science, University College London, in partial fulfilment of the requirements for the MSc in Artificial Intelligence for Sustainable Development (AI4SD). The underlying research project was registered as Project Code P09 under the working title *"Standardizing Reporting of Dependent Variables in HCI Research: A Naming Scheme and Conversion Tool for Open Data"*. The project addresses the pressing challenge of methodological fragmentation and inconsistent naming conventions of dependent variables (DVs) across empirical Human-Computer Interaction (HCI) research.  
 
 Drawing on systematic evidence from [CHI](https://chi2025.acm.org/), [CHI PLAY](https://chiplay.acm.org/2025/), [AutoUI](https://www.auto-ui.org/25/), and other top-tier venues, the project proposes both a **flexible naming scheme** and a **conversion tool** to improve transparency, interoperability, and comparability across open HCI datasets.  
 
@@ -361,11 +361,30 @@ This project followed a structured literature review methodology. Key steps incl
 ## Citation
 If you use this repository or the accompanying tool, please cite:
 
+**APA**
+
+Mehri, M. (2025). *Breaking data silos in HCI: A standardized framework and open-source tool for FAIR, reproducible, and cumulative research* [MSc dissertation, University College London, Department of Computer Science].
 
 #### BibTeX
 
+```bibtex
+@mastersthesis{mehri2025breaking,
+  author  = {Meriem Mehri},
+  title   = {Breaking Data Silos in {HCI}: A Standardized Framework and Open-Source Tool for {FAIR}, Reproducible, and Cumulative Research},
+  school  = {University College London},
+  year    = {2025},
+  month   = sep,
+  type    = {{MSc} dissertation},
+  note    = {MSc in Artificial Intelligence for Sustainable Development (AI4SD), Department of Computer Science. Supervised by Mark Colley.},
+  url     = {https://github.com/MeriemMhr/dv-standardization-tool}
+}
+```
 
 ## Contact Details
+
+**Meriem Mehri**
+MSc in Artificial Intelligence for Sustainable Development, University College London
+GitHub: [github.com/MeriemMhr](https://github.com/MeriemMhr)
 
 
 
@@ -390,8 +409,14 @@ dv-standardization-tool/
 │   ├── standard_metadata_mapping.yaml   # Metadata / process columns
 │   ├── schema_meta.yaml                 # Schema metadata (versioning, authorship)
 │   ├── schema_validation_rules.yaml     # Optional constraint rules
+│   ├── schema_changelog.yaml            # Manual schema evolution tracking
 │   ├── example_alias_submissions.yaml   # Sample community submissions
-│   └── schema_changelog.yaml            # Manual schema evolution tracking
+│   ├── dataset_type_profiles.yaml       # Per-type classification rules
+│   ├── measurement_categories.yaml      # Measurement category taxonomy
+│   ├── thematic_clusters.yaml           # Thematic variable clusters
+│   ├── inference_rules.yaml             # LLM inference constraints
+│   ├── fact_av_mapping.yaml             # Automotive/AV domain mappings
+│   └── osf_cwd6h_mapping.yaml           # OSF dataset-specific mapping
 │
 ├── scripts/
 │   ├── convert_dv.py                        # Single-file standardization
@@ -400,7 +425,14 @@ dv-standardization-tool/
 │   ├── schema_utils.py                      # Flattening, validation, and schema helpers
 │   ├── visual_helpers.py                    # Comparison visualizations
 │   ├── validate_schema.py                   # Schema sanity check
-│   └── llm_utils.py                         # Optional LLM inference logic
+│   ├── validate_cluster.py                  # Cluster consistency checks
+│   ├── llm_utils.py                         # Optional LLM inference logic
+│   ├── dv_inference.py                      # DV inference helpers
+│   ├── batch_profiles.py                    # Per-source batch profile logic
+│   ├── batch_reporting.py                   # Batch run reporting utilities
+│   ├── measurement_types.py                 # Measurement type classification
+│   ├── reshape_utils.py                     # Dataset reshape helpers
+│   └── survey_parsers.py                    # Survey/questionnaire parsers
 │
 ├── analyses/
 │   ├── multi_study_analysis.py              # Cross-study overlap & meta-analysis
@@ -414,19 +446,25 @@ dv-standardization-tool/
 │
 ├── ui/
 │   ├── app.py                   # Streamlit app entry point
-│   ├── uploader.py              # Upload logic
-│   ├── column_preview.py        # Column-level feedback
-│   ├── download_button.py       # Download-ready output
+│   ├── requirements.txt         # UI-specific dependencies
 │   ├── assets/
+│   │   ├── logo.png
 │   │   └── style.css            # Minimal styling
-│   └── components/              # Optional modular UI elements
+│   └── components/              # Modular UI elements
+│       ├── uploader.py          # Upload logic
+│       ├── column_preview.py    # Column-level feedback
+│       ├── download_button.py   # Download-ready output
+│       └── charts.py            # Visualization components
 │
 ├── tests/                       # Pytest suite covering pipeline + analyses
 │
 ├── .github/
-│   └── ISSUE_TEMPLATE/
-│       └── contribution-suggestion.md
-│   └── PULL_REQUEST_TEMPLATE.md
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── config.yml
+│   │   └── contribution-suggestion.yml
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   └── workflows/
+│       └── ci.yml
 │
 ├── docs/
 │   ├── overview.md
@@ -438,22 +476,30 @@ dv-standardization-tool/
 │   ├── future_plans.md
 │   ├── directory_map.md
 │   ├── troubleshooting_index.md
+│   ├── new_features_v2.1.md
+│   ├── summary.md
 │   └── changelog.md
 │
 ├── troubleshooting/
 │   ├── known_issues.md
 │   ├── schema_mismatches.md
 │   ├── notebook_dependency_notes.md
-│   ├── llm_prompt_failures.md
-│   ├── trace_convert_dv.txt
-│   ├── notebook_kernel_error.txt
-│   └── broken_schema_preview_example.png
+│   └── debug_logs/
+│       ├── llm_prompt_failures.md
+│       ├── trace_convert_dv.txt
+│       ├── notebook_kernel_error.txt
+│       ├── log_2024-07-01_streamlit_example.txt
+│       └── broken_schema_preview_example.png
 │
-├── sources_manifest_example.yaml   # Example batch manifest
+├── sources_manifest_example.yaml        # Example batch manifest (GitHub + OSF sources)
+├── sources_manifest_osf_example.yaml    # OSF-specific manifest example
+├── sources_manifest_no4tu.yaml          # Manifest variant excluding 4TU sources
+├── pyproject.toml
 ├── LICENSE
 ├── .gitignore
 ├── README.md
 ├── requirements-core.txt
+├── requirements-dev.txt
 ├── requirements-llm.txt
 ├── requirements-ui.txt
 └── requirements.txt
