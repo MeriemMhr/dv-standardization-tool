@@ -386,8 +386,7 @@ Mehri, M. (2025). *Breaking data silos in HCI: A standardized framework and open
 
 _MSc in Artificial Intelligence for Sustainable Development, University College London_
 
-GitHub: [github.com/MeriemMhr](https://github.com/MeriemMhr)
-
+[GitHub](https://github.com/MeriemMhr)
 
 
 ## Repository Structure & Rationale
