@@ -1,1721 +1,2593 @@
-version: "3.0"
-updated: "2026-04-10"
-
-# all `cluster` values must match an ID in thematic_clusters.yaml
-
-# canonical_range: [min, max] — the authoritative numerical range for this DV.
-# Read by multi_study_analysis.py for z-score normalization. Omit for unbounded DVs.
-
+version: '3.0'
+updated: '2026-04-10'
 dvs:
-
-  # ================================================================
-  #  PERFORMANCE
-  # ================================================================
-  - id: task_completion_time
-    label: "Task Completion Time"
-    cluster: performance
-    measurement:
-      category: Time
-      primary_unit: seconds
-      allowed_units: [s, ms, min]
-      scale_type: ratio
-      direction: lower_is_better
-    aliases:
-      - time_spent
-      - completion_duration
-      - task_time
-      - duration
-      - time_on_task
-      - response_time
-      - reaction_time
-      - rt
-      - task_duration
-    instruments: []
-    units: ["s", "ms"]
-    notes: "Lower-is-better; report central tendency + dispersion."
-
-  - id: task_success
-    label: "Task Success Rate"
-    cluster: performance
-    measurement:
-      category: Binary
-      primary_unit: proportion
-      allowed_units: [proportion, percentage, binary]
-      scale_type: ratio
-      direction: higher_is_better
-      canonical_range: [0, 1]
-    aliases:
-      - success_rate
-      - completion_rate
-      - task_success_ratio
-      - accuracy
-      - correct_rate
-    instruments: []
-    units: ["%", "proportion"]
-    notes: "Define success criteria clearly."
-
-  - id: error_rate
-    label: "Error Rate"
-    cluster: performance
-    measurement:
-      category: Accuracy
-      primary_unit: percentage
-      allowed_units: [percentage, proportion, count, rate]
-      scale_type: ratio
-      direction: lower_is_better
-      canonical_range: [0, 100]
-    aliases:
-      - mistake_ratio
-      - failure_rate
-      - error_percentage
-      - error_count
-      - errors
-    instruments: []
-    units: ["%", "count", "errors/task"]
-    notes: "Distinguish slips vs mistakes if available."
-
-  - id: efficiency
-    label: "Efficiency"
-    cluster: performance
-    measurement:
-      category: Proportion
-      primary_unit: ratio
-      allowed_units: [ratio, rate, percentage]
-      scale_type: ratio
-      direction: higher_is_better
-    aliases:
-      - throughput
-      - keystrokes_per_task
-      - steps_per_task
-      - task_efficiency
-    instruments: []
-    units: ["tasks/min", "actions/task"]
-    notes: "Report how computed (e.g., tasks/min; actions/task)."
-
-  # ================================================================
-  #  BEHAVIORAL / INTERACTION
-  # ================================================================
-  - id: click_through_rate
-    label: "Click-Through Rate"
-    cluster: behavioral_interaction
-    measurement:
-      category: Proportion
-      primary_unit: percentage
-      allowed_units: [percentage, proportion, ratio]
-      scale_type: ratio
-      direction: neutral
-      canonical_range: [0, 100]
-    aliases:
-      - ctr
-      - click_ratio
-      - clicks_per_view
-    instruments: []
-    units: ["%", "ratio"]
-
-  - id: interaction_events
-    label: "Interaction Events"
-    cluster: behavioral_interaction
-    measurement:
-      category: Count
-      primary_unit: integer
-      allowed_units: [count, frequency, events_per_min]
-      scale_type: ratio
-      direction: neutral
-    aliases:
-      - clicks
-      - taps
-      - keystrokes
-      - interactions
-      - touch_count
-    instruments: []
-    units: ["count", "events/min"]
-
-  - id: retention_time
-    label: "Retention / Dwell Time"
-    cluster: behavioral_interaction
-    measurement:
-      category: Time
-      primary_unit: seconds
-      allowed_units: [s, ms, min]
-      scale_type: ratio
-      direction: higher_is_better
-    aliases:
-      - dwell_time
-      - session_duration
-      - time_on_page
-    instruments: []
-    units: ["s", "min"]
-
-  # ================================================================
-  #  COGNITIVE LOAD — NASA-TLX
-  # ================================================================
-  - id: TLX_SCORE
-    label: "NASA-TLX Composite Score"
-    cluster: cognitive_load
-    measurement:
-      category: Score
-      primary_unit: "weighted composite"
-      allowed_units: ["weighted composite", "unweighted composite"]
-      scale_type: ratio
-      direction: lower_is_better
-      canonical_range: [0, 100]
-    aliases:
-      - tlxScore
-      - TLXScore
-      - tlx_score
-      - NASA_TLX_SCORE
-      - nasa_tlx_score
-      - nasa_tlx_total
-      - TLX_total
-      - raw_tlx
-      - rtlx
-    instruments:
-      - "NASA-TLX"
-    units: ["weighted composite", "unweighted composite"]
-    notes: "Derived summary score. Lower is better; report central tendency + dispersion."
-
-  - id: mental_demand
-    label: "Mental Demand"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "21-point (0-20)"
-      allowed_units: ["21-point", "Likert", "VAS"]
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 20]
-    aliases:
-      - cognitive_load
-      - mental_load
-      - workload_rating
-      - tlx_mental_demand
-      - nasa_tlx_mental
-      - NASA-TLX1
-      - TLX1
-      - tlx1
-      - NASA_TLX1
-      - nasa_tlx1
-      - MentalLoad
-      - ML
-    instruments:
-      - "NASA-TLX (Global or Subscales)"
-      - "Paas Scale"
-      - "RSME"
-    units: ["Likert", "VAS"]
-
-  - id: physical_demand
-    label: "Physical Demand"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "21-point (0–20)"
-      allowed_units: ["21-point", "Likert", "VAS"]
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 20]
-    aliases:
-      - TLX2
-      - tlx2
-      - NASA_TLX2
-      - nasa_tlx2
-      - physical_demand
-      - tlx_physical
-    instruments:
-      - "NASA-TLX"
-    units: ["Likert", "VAS"]
-
-  - id: temporal_demand
-    label: "Temporal Demand"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "21-point (0–20)"
-      allowed_units: ["21-point", "Likert", "VAS"]
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 20]
-    aliases:
-      - TLX3
-      - tlx3
-      - NASA_TLX3
-      - nasa_tlx3
-      - temporal_demand
-      - tlx_temporal
-    instruments:
-      - "NASA-TLX"
-    units: ["Likert", "VAS"]
-
-  - id: performance
-    label: "Performance (TLX)"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "21-point (0–20)"
-      allowed_units: ["21-point", "Likert", "VAS"]
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 20]
-    aliases:
-      - TLX4
-      - tlx4
-      - NASA_TLX4
-      - nasa_tlx4
-      - performance
-      - tlx_performance
-    instruments:
-      - "NASA-TLX"
-    units: ["Likert", "VAS"]
-    notes: "Note: scale direction is inverted for this subscale in raw NASA-TLX scoring."
-
-  - id: effort
-    label: "Effort"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "21-point (0–20)"
-      allowed_units: ["21-point", "Likert", "VAS"]
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 20]
-    aliases:
-      - TLX5
-      - tlx5
-      - NASA_TLX5
-      - nasa_tlx5
-      - effort
-      - tlx_effort
-    instruments:
-      - "NASA-TLX"
-    units: ["Likert", "VAS"]
-
-  - id: frustration
-    label: "Frustration"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "21-point (0–20)"
-      allowed_units: ["21-point", "Likert", "VAS"]
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 20]
-    aliases:
-      - TLX6
-      - tlx6
-      - NASA_TLX6
-      - nasa_tlx6
-      - frustration
-      - tlx_frustration
-    instruments:
-      - "NASA-TLX"
-    units: ["Likert", "VAS"]
-
-  # ================================================================
-  #  COGNITIVE LOAD — DALI (Driving Activity Load Index)
-  # ================================================================
-  - id: dali_total
-    label: "DALI Total Score"
-    cluster: cognitive_load
-    measurement:
-      category: Score
-      primary_unit: "6-point (0–5)"
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 5]
-    aliases:
-      - DALI_score
-      - dali_score
-      - driving_activity_load
-      - DALI
-    instruments:
-      - "DALI"
-    notes: "Driving Activity Load Index (Pauzié 2008). Mean of 6 subscales, each 0–5."
-
-  - id: dali_effort_of_attention
-    label: "DALI — Effort of Attention"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "6-point (0–5)"
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 5]
-    aliases: [DALI_attention, dali_attention, effort_of_attention]
-    instruments: ["DALI"]
-
-  - id: dali_visual_demand
-    label: "DALI — Visual Demand"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "6-point (0–5)"
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 5]
-    aliases: [DALI_visual, dali_visual, visual_demand]
-    instruments: ["DALI"]
-
-  - id: dali_auditory_demand
-    label: "DALI — Auditory Demand"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "6-point (0–5)"
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 5]
-    aliases: [DALI_auditory, dali_auditory, auditory_demand]
-    instruments: ["DALI"]
-
-  - id: dali_temporal_demand
-    label: "DALI — Temporal Demand"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "6-point (0–5)"
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 5]
-    aliases: [DALI_temporal, dali_temporal_demand]
-    instruments: ["DALI"]
-
-  - id: dali_interference
-    label: "DALI — Interference"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "6-point (0–5)"
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 5]
-    aliases: [DALI_interference, dali_int]
-    instruments: ["DALI"]
-
-  - id: dali_situational_stress
-    label: "DALI — Situational Stress"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "6-point (0–5)"
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 5]
-    aliases: [DALI_stress, dali_stress]
-    instruments: ["DALI"]
-
-  # ================================================================
-  #  COGNITIVE LOAD — sART (Situation Awareness Rating Technique)
-  # ================================================================
-  - id: sart_total
-    label: "sART Total Score"
-    cluster: cognitive_load
-    measurement:
-      category: Continuous
-      primary_unit: "composite"
-      scale_type: ordinal
-      direction: higher_is_better
-    aliases: [SART_total, sart_score, SART, situational_awareness_rating]
-    instruments: ["SART"]
-    notes: "Total = Understanding − (Demand − Supply). Range depends on subscale computation."
-
-  - id: sart_understanding
-    label: "sART Understanding Subscale"
-    cluster: cognitive_load
-    measurement:
-      category: Continuous
-      primary_unit: "21-point (0–20)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [0, 20]
-    aliases: [sart_understanding_rating, sart_u, SART_Understanding, SARTUnderstanding]
-    instruments: ["SART"]
-    notes: >
-      Understanding subscale of the Situation Awareness Rating Technique
-      (SART; Taylor 1990). Scored 0–20. Distinct from eHMI comprehension
-      items — do not pool with understanding_rating.
-
-  - id: sart_demand
-    label: "sART Demand Subscale"
-    cluster: cognitive_load
-    measurement:
-      category: Continuous
-      primary_unit: "21-point (0–20)"
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [0, 20]
-    aliases: [sart_d, SART_Demand, SARTDemand, sart_demand_rating]
-    instruments: ["SART"]
-
-  - id: sart_supply
-    label: "sART Supply Subscale"
-    cluster: cognitive_load
-    measurement:
-      category: Continuous
-      primary_unit: "21-point (0–20)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [0, 20]
-    aliases: [sart_s, SART_Supply, SARTSupply, sart_supply_rating]
-    instruments: ["SART"]
-
-  - id: situational_awareness
-    label: "Situational Awareness (generic)"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: score
-      allowed_units: [score, Likert, percentage]
-      scale_type: ordinal
-      direction: higher_is_better
-    aliases:
-      - sa
-      - SA_score
-      - sagat_score
-    instruments:
-      - "SAGAT"
-      - "SPAM"
-    units: ["score", "%"]
-
-  # ================================================================
-  #  SAFETY & TRUST
-  # ================================================================
-  - id: perceived_safety
-    label: "Perceived Safety"
-    cluster: safety_trust
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      allowed_units: [Likert, score]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [PerceivedSafety, PS, perceived_safety_score, safety_rating]
-    notes: "Bipolar 7-point scale (−3 to +3) as used in eHMI studies."
-
-  - id: perceived_risk
-    label: "Perceived Risk"
-    cluster: safety_trust
-    measurement:
-      category: Continuous
-      primary_unit: "VAS (1–100)"
-      allowed_units: [VAS, score]
-      scale_type: ratio
-      direction: lower_is_better
-      canonical_range: [1, 100]
-    aliases: [perceivedRisk, perceived_risk_rating, risk_rating, ArduinoData1_osf_cwd6h]
-    instruments: []
-    units: ["VAS (1–100)"]
-    notes: "Visual Analogue Scale for perceived risk. In osf_cwd6h, ArduinoData1 encodes this measure."
-
-  # ---- Trust: generic single-item ----
-  - id: trust_rating
-    label: "Trust in Automation / eHMI"
-    cluster: safety_trust
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      allowed_units: [Likert, score]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [Trust, trust_score, trust_in_automation]
-    notes: "Generic single-item trust. For multi-item scales, use TiA or Jian subscales."
-
-  # ---- Trust: Körber Trust-in-Automation (TiA) subscales ----
-  - id: tia_reliability_competence
-    label: "TiA — Reliability/Competence"
-    cluster: safety_trust
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [TiA_RC, tia_rc, reliability_competence, TiA1, trust_reliability]
-    instruments: ["Körber TiA"]
-
-  - id: tia_understanding_predictability
-    label: "TiA — Understanding/Predictability"
-    cluster: safety_trust
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [TiA_UP, tia_up, understanding_predictability, TiA2, trust_predictability]
-    instruments: ["Körber TiA"]
-
-  - id: tia_familiarity
-    label: "TiA — Familiarity"
-    cluster: safety_trust
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [TiA_F, tia_fam, trust_familiarity, TiA3]
-    instruments: ["Körber TiA"]
-
-  - id: tia_intention_of_developers
-    label: "TiA — Intention of Developers"
-    cluster: safety_trust
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [TiA_ID, tia_id, intention_developers, TiA4, trust_developers]
-    instruments: ["Körber TiA"]
-
-  - id: tia_propensity_to_trust
-    label: "TiA — Propensity to Trust"
-    cluster: safety_trust
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [TiA_PT, tia_pt, propensity_trust, TiA5, trust_propensity]
-    instruments: ["Körber TiA"]
-
-  - id: tia_trust_in_automation
-    label: "TiA — Trust in Automation"
-    cluster: safety_trust
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [TiA_TiA, tia_tia, TiA6, trust_automation_scale]
-    instruments: ["Körber TiA"]
-    notes: "Overall TiA subscale. Not to be confused with the single-item trust_rating."
-
-  # ---- Trust: Jian et al. (2000) ----
-  - id: jian_trust
-    label: "Jian Trust Scale"
-    cluster: safety_trust
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [jian_trust_score, jian_scale, trust_jian, checklist_trust]
-    instruments: ["Jian et al. Trust Scale"]
-    notes: "12-item trust/distrust checklist (Jian, Bisantz & Drury 2000). Mean of trust items on 1–7."
-
-  # ---- Understanding (eHMI-specific) ----
-  - id: understanding_rating
-    label: "Understanding / Comprehension (eHMI)"
-    cluster: cognitive_load
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      allowed_units: [Likert, score]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [Understanding]
-    notes: "eHMI signal comprehension item. Do NOT use for sART Understanding subscale — see sart_understanding."
-
-  # ================================================================
-  #  UX & SATISFACTION — SUS
-  # ================================================================
-  - id: aesthetics_rating
-    label: "Aesthetic Evaluation"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      allowed_units: [Likert, score]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [Aesthetics, visual_appeal, attractiveness_rating]
-
-  - id: acceptance_rating
-    label: "Acceptance (generic)"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      allowed_units: [Likert, score]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [Acceptance, acceptance_score]
-
-  - id: user_satisfaction
-    label: "User Satisfaction"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point"
-      allowed_units: ["5-point", "7-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases:
-      - satisfaction_score
-      - satisfaction_rating
-      - user_feedback
-      - perceived_quality
-      - CSAT
-    instruments:
-      - "UEQ"
-      - "UMUX / UMUX-Lite"
-      - "CSAT"
-      - "NPS"
-    units: ["UEQ scale", "Likert", "NPS"]
-
-  - id: usability
-    label: "Usability (SUS Total)"
-    cluster: ux_satisfaction
-    measurement:
-      category: Score
-      primary_unit: "SUS (0–100)"
-      allowed_units: ["100-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [0, 100]
-    aliases:
-      - sus_score
-      - system_usability_scale
-      - SUSScore
-      - susScore
-      - SYSTEM_USABILITY_SCORE
-      - system_usability_score
-      - SUS_total
-    instruments:
-      - "SUS"
-    units: ["SUS (0–100)"]
-
-  - id: SUS1
-    label: "SUS Item 1"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [sus1, usability_q1, UsabilityQ1, U1]
-    instruments: ["SUS"]
-
-  - id: SUS2
-    label: "SUS Item 2"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [sus2, usability_q2, UsabilityQ2, U2]
-    instruments: ["SUS"]
-
-  - id: SUS3
-    label: "SUS Item 3"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [sus3, usability_q3, UsabilityQ3, U3]
-    instruments: ["SUS"]
-
-  - id: SUS4
-    label: "SUS Item 4"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [sus4, usability_q4, UsabilityQ4, U4]
-    instruments: ["SUS"]
-
-  - id: SUS5
-    label: "SUS Item 5"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [sus5, usability_q5, UsabilityQ5, U5]
-    instruments: ["SUS"]
-
-  - id: SUS6
-    label: "SUS Item 6"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [sus6, usability_q6, UsabilityQ6, U6]
-    instruments: ["SUS"]
-
-  - id: SUS7
-    label: "SUS Item 7"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [sus7, usability_q7, UsabilityQ7, U7]
-    instruments: ["SUS"]
-
-  - id: SUS8
-    label: "SUS Item 8"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [sus8, usability_q8, UsabilityQ8, U8]
-    instruments: ["SUS"]
-
-  - id: SUS9
-    label: "SUS Item 9"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [sus9, usability_q9, UsabilityQ9, U9]
-    instruments: ["SUS"]
-
-  - id: SUS10
-    label: "SUS Item 10"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [sus10, usability_q10, UsabilityQ10, U10]
-    instruments: ["SUS"]
-
-  # ================================================================
-  #  UX & SATISFACTION — UEQ (User Experience Questionnaire)
-  # ================================================================
-  - id: ueq_attractiveness
-    label: "UEQ — Attractiveness"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [UEQ_attractiveness, ueq_att, UEQ_ATT, attractiveness]
-    instruments: ["UEQ", "UEQ+"]
-
-  - id: ueq_perspicuity
-    label: "UEQ — Perspicuity"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [UEQ_perspicuity, ueq_per, UEQ_PER, perspicuity, clarity]
-    instruments: ["UEQ", "UEQ+"]
-
-  - id: ueq_efficiency
-    label: "UEQ — Efficiency"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [UEQ_efficiency, ueq_eff, UEQ_EFF]
-    instruments: ["UEQ", "UEQ+"]
-
-  - id: ueq_dependability
-    label: "UEQ — Dependability"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [UEQ_dependability, ueq_dep, UEQ_DEP, dependability]
-    instruments: ["UEQ", "UEQ+"]
-
-  - id: ueq_stimulation
-    label: "UEQ — Stimulation"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [UEQ_stimulation, ueq_sti, UEQ_STI, stimulation]
-    instruments: ["UEQ", "UEQ+"]
-
-  - id: ueq_novelty
-    label: "UEQ — Novelty"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [UEQ_novelty, ueq_nov, UEQ_NOV, novelty, originality]
-    instruments: ["UEQ", "UEQ+"]
-
-  - id: ueq_pragmatic
-    label: "UEQ — Pragmatic Quality (PQ)"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [UEQ_PQ, ueq_pq, pragmatic_quality, UEQ_S_PQ]
-    instruments: ["UEQ-S", "UEQ"]
-    notes: "UEQ-S pragmatic quality = mean(perspicuity, efficiency, dependability)."
-
-  - id: ueq_hedonic
-    label: "UEQ — Hedonic Quality (HQ)"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [UEQ_HQ, ueq_hq, hedonic_quality, UEQ_S_HQ]
-    instruments: ["UEQ-S", "UEQ"]
-    notes: "UEQ-S hedonic quality = mean(stimulation, novelty)."
-
-  # ================================================================
-  #  UX — AttrakDiff
-  # ================================================================
-  - id: attrakdiff_pq
-    label: "AttrakDiff — Pragmatic Quality"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [AD_PQ, attrakdiff_pragmatic, pragmatic_quality_ad]
-    instruments: ["AttrakDiff"]
-
-  - id: attrakdiff_hqs
-    label: "AttrakDiff — Hedonic Quality (Stimulation)"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [AD_HQS, attrakdiff_stimulation, HQ_S]
-    instruments: ["AttrakDiff"]
-
-  - id: attrakdiff_hqi
-    label: "AttrakDiff — Hedonic Quality (Identity)"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [AD_HQI, attrakdiff_identity, HQ_I]
-    instruments: ["AttrakDiff"]
-
-  - id: attrakdiff_att
-    label: "AttrakDiff — Attractiveness"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (-3–3)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-3, 3]
-    aliases: [AD_ATT, attrakdiff_attractiveness]
-    instruments: ["AttrakDiff"]
-
-  # ================================================================
-  #  ACCEPTANCE — UTAUT / TAM
-  # ================================================================
-  - id: utaut_performance_expectancy
-    label: "UTAUT — Performance Expectancy"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [PE, performance_expectancy, utaut_pe, UTAUT_PE]
-    instruments: ["UTAUT", "UTAUT2"]
-
-  - id: utaut_effort_expectancy
-    label: "UTAUT — Effort Expectancy"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [EE, effort_expectancy, utaut_ee, UTAUT_EE, ease_of_use]
-    instruments: ["UTAUT", "UTAUT2"]
-
-  - id: utaut_social_influence
-    label: "UTAUT — Social Influence"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [SI, social_influence, utaut_si, UTAUT_SI]
-    instruments: ["UTAUT", "UTAUT2"]
-
-  - id: utaut_facilitating_conditions
-    label: "UTAUT — Facilitating Conditions"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [FC, facilitating_conditions, utaut_fc, UTAUT_FC]
-    instruments: ["UTAUT", "UTAUT2"]
-
-  - id: utaut_behavioral_intention
-    label: "UTAUT — Behavioral Intention"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [BI, behavioral_intention, utaut_bi, UTAUT_BI, intention_to_use]
-    instruments: ["UTAUT", "UTAUT2", "TAM"]
-
-  - id: utaut_hedonic_motivation
-    label: "UTAUT2 — Hedonic Motivation"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [HM, hedonic_motivation, utaut2_hm]
-    instruments: ["UTAUT2"]
-
-  - id: tam_perceived_usefulness
-    label: "TAM — Perceived Usefulness"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [PU, perceived_usefulness, tam_pu, TAM_PU]
-    instruments: ["TAM", "TAM2", "TAM3"]
-
-  - id: tam_perceived_ease_of_use
-    label: "TAM — Perceived Ease of Use"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [PEOU, perceived_ease_of_use, tam_peou, TAM_PEOU]
-    instruments: ["TAM", "TAM2", "TAM3"]
-
-  # ================================================================
-  #  ACCEPTANCE — van der Laan
-  # ================================================================
-  - id: AOA_USEFULNESS
-    label: "van der Laan Acceptance — Usefulness Subscale"
-    cluster: ux_satisfaction
-    measurement:
-      category: Score
-      primary_unit: "5-point (-2 to +2)"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-2, 2]
-    aliases: [AOAUsefulness, aoa_usefulness, van_der_laan_usefulness, acceptance_usefulness, vdl_usefulness]
-    instruments: ["van der Laan Acceptance Scale"]
-    notes: "Derived subscale score; mean of AOA usefulness items."
-
-  - id: AOA_SATISFYING
-    label: "van der Laan Acceptance — Satisfying Subscale"
-    cluster: ux_satisfaction
-    measurement:
-      category: Score
-      primary_unit: "5-point (-2 to +2)"
-      allowed_units: ["5-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [-2, 2]
-    aliases: [AOASatisfying, aoa_satisfying, van_der_laan_satisfying, acceptance_satisfying, vdl_satisfying]
-    instruments: ["van der Laan Acceptance Scale"]
-    notes: "Derived subscale score; mean of AOA satisfying items."
-
-  - id: AOA1
-    label: "van der Laan — Item 1"
-    cluster: ux_satisfaction
-    measurement: { category: Likert, primary_unit: "5-point (-2 to +2)", scale_type: ordinal, direction: higher_is_better, canonical_range: [-2, 2] }
-    aliases: [aoa1, acceptance_1, vdL_1]
-    instruments: ["van der Laan Acceptance Scale"]
-  - id: AOA2
-    label: "van der Laan — Item 2"
-    cluster: ux_satisfaction
-    measurement: { category: Likert, primary_unit: "5-point (-2 to +2)", scale_type: ordinal, direction: higher_is_better, canonical_range: [-2, 2] }
-    aliases: [aoa2, acceptance_2, vdL_2]
-    instruments: ["van der Laan Acceptance Scale"]
-  - id: AOA3
-    label: "van der Laan — Item 3"
-    cluster: ux_satisfaction
-    measurement: { category: Likert, primary_unit: "5-point (-2 to +2)", scale_type: ordinal, direction: higher_is_better, canonical_range: [-2, 2] }
-    aliases: [aoa3, acceptance_3, vdL_3]
-    instruments: ["van der Laan Acceptance Scale"]
-  - id: AOA4
-    label: "van der Laan — Item 4"
-    cluster: ux_satisfaction
-    measurement: { category: Likert, primary_unit: "5-point (-2 to +2)", scale_type: ordinal, direction: higher_is_better, canonical_range: [-2, 2] }
-    aliases: [aoa4, acceptance_4, vdL_4]
-    instruments: ["van der Laan Acceptance Scale"]
-  - id: AOA5
-    label: "van der Laan — Item 5"
-    cluster: ux_satisfaction
-    measurement: { category: Likert, primary_unit: "5-point (-2 to +2)", scale_type: ordinal, direction: higher_is_better, canonical_range: [-2, 2] }
-    aliases: [aoa5, acceptance_5, vdL_5]
-    instruments: ["van der Laan Acceptance Scale"]
-  - id: AOA6
-    label: "van der Laan — Item 6"
-    cluster: ux_satisfaction
-    measurement: { category: Likert, primary_unit: "5-point (-2 to +2)", scale_type: ordinal, direction: higher_is_better, canonical_range: [-2, 2] }
-    aliases: [aoa6, acceptance_6, vdL_6]
-    instruments: ["van der Laan Acceptance Scale"]
-  - id: AOA7
-    label: "van der Laan — Item 7"
-    cluster: ux_satisfaction
-    measurement: { category: Likert, primary_unit: "5-point (-2 to +2)", scale_type: ordinal, direction: higher_is_better, canonical_range: [-2, 2] }
-    aliases: [aoa7, acceptance_7, vdL_7]
-    instruments: ["van der Laan Acceptance Scale"]
-  - id: AOA8
-    label: "van der Laan — Item 8"
-    cluster: ux_satisfaction
-    measurement: { category: Likert, primary_unit: "5-point (-2 to +2)", scale_type: ordinal, direction: higher_is_better, canonical_range: [-2, 2] }
-    aliases: [aoa8, acceptance_8, vdL_8]
-    instruments: ["van der Laan Acceptance Scale"]
-  - id: AOA9
-    label: "van der Laan — Item 9"
-    cluster: ux_satisfaction
-    measurement: { category: Likert, primary_unit: "5-point (-2 to +2)", scale_type: ordinal, direction: higher_is_better, canonical_range: [-2, 2] }
-    aliases: [aoa9, acceptance_9, vdL_9]
-    instruments: ["van der Laan Acceptance Scale"]
-
-  # ================================================================
-  #  SIMULATOR SICKNESS — SSQ
-  # ================================================================
-  - id: ssq_total
-    label: "SSQ Total Score"
-    cluster: physiological_biometric
-    measurement:
-      category: Score
-      primary_unit: "SSQ weighted"
-      scale_type: ratio
-      direction: lower_is_better
-      canonical_range: [0, 235.62]
-    aliases: [SSQ_total, ssq_score, simulator_sickness, SSQ, cybersickness_total]
-    instruments: ["SSQ (Kennedy et al. 1993)"]
-    notes: "Simulator Sickness Questionnaire total. Max theoretical = 235.62. Scores >20 indicate concern."
-
-  - id: ssq_nausea
-    label: "SSQ — Nausea"
-    cluster: physiological_biometric
-    measurement:
-      category: Score
-      primary_unit: "SSQ weighted"
-      scale_type: ratio
-      direction: lower_is_better
-      canonical_range: [0, 200.34]
-    aliases: [SSQ_N, ssq_n, ssq_nausea_score, nausea]
-    instruments: ["SSQ"]
-
-  - id: ssq_oculomotor
-    label: "SSQ — Oculomotor"
-    cluster: physiological_biometric
-    measurement:
-      category: Score
-      primary_unit: "SSQ weighted"
-      scale_type: ratio
-      direction: lower_is_better
-      canonical_range: [0, 159.18]
-    aliases: [SSQ_O, ssq_o, ssq_oculomotor_score, oculomotor]
-    instruments: ["SSQ"]
-
-  - id: ssq_disorientation
-    label: "SSQ — Disorientation"
-    cluster: physiological_biometric
-    measurement:
-      category: Score
-      primary_unit: "SSQ weighted"
-      scale_type: ratio
-      direction: lower_is_better
-      canonical_range: [0, 292.32]
-    aliases: [SSQ_D, ssq_d, ssq_disorientation_score, disorientation]
-    instruments: ["SSQ"]
-
-  - id: vrsq_score
-    label: "VRSQ Score"
-    cluster: physiological_biometric
-    measurement:
-      category: Score
-      primary_unit: "percentage (0–100)"
-      scale_type: ratio
-      direction: lower_is_better
-      canonical_range: [0, 100]
-    aliases: [VRSQ, vrsq, vr_sickness, virtual_reality_sickness]
-    instruments: ["VRSQ (Kim et al. 2018)"]
-    notes: "VR Sickness Questionnaire. 9 items, 0–100% score."
-
-  - id: fms_score
-    label: "Fast Motion Sickness Score"
-    cluster: physiological_biometric
-    measurement:
-      category: Continuous
-      primary_unit: "VAS (0–20)"
-      scale_type: ratio
-      direction: lower_is_better
-      canonical_range: [0, 20]
-    aliases: [FMS, fms, fast_motion_sickness, motion_sickness_score]
-    instruments: ["FMS (Keshavarz & Hecht 2011)"]
-
-  # ================================================================
-  #  PRESENCE — IPQ (Igroup Presence Questionnaire)
-  # ================================================================
-  - id: ipq_general_presence
-    label: "IPQ — General Presence"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (0–6)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [0, 6]
-    aliases: [IPQ_GP, ipq_gp, general_presence, G1]
-    instruments: ["IPQ"]
-    notes: "Single-item 'sense of being there' (0–6)."
-
-  - id: ipq_spatial_presence
-    label: "IPQ — Spatial Presence"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (0–6)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [0, 6]
-    aliases: [IPQ_SP, ipq_sp, spatial_presence]
-    instruments: ["IPQ"]
-
-  - id: ipq_involvement
-    label: "IPQ — Involvement"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (0–6)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [0, 6]
-    aliases: [IPQ_INV, ipq_inv, involvement]
-    instruments: ["IPQ"]
-
-  - id: ipq_experienced_realism
-    label: "IPQ — Experienced Realism"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "7-point (0–6)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [0, 6]
-    aliases: [IPQ_REAL, ipq_real, experienced_realism, realness]
-    instruments: ["IPQ"]
-
-  # ================================================================
-  #  GODSPEED QUESTIONNAIRE
-  # ================================================================
-  - id: godspeed_anthropomorphism
-    label: "Godspeed — Anthropomorphism"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [GS_anthropomorphism, godspeed_anthro, anthropomorphism]
-    instruments: ["Godspeed (Bartneck et al. 2009)"]
-
-  - id: godspeed_animacy
-    label: "Godspeed — Animacy"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [GS_animacy, godspeed_anim, animacy]
-    instruments: ["Godspeed"]
-
-  - id: godspeed_likeability
-    label: "Godspeed — Likeability"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [GS_likeability, godspeed_like, likeability, likability]
-    instruments: ["Godspeed"]
-
-  - id: godspeed_perceived_intelligence
-    label: "Godspeed — Perceived Intelligence"
-    cluster: ux_satisfaction
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [GS_intelligence, godspeed_pi, perceived_intelligence]
-    instruments: ["Godspeed"]
-
-  - id: godspeed_perceived_safety
-    label: "Godspeed — Perceived Safety"
-    cluster: safety_trust
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [GS_safety, godspeed_safety]
-    instruments: ["Godspeed"]
-    notes: "Godspeed safety subscale. Distinct from the bipolar perceived_safety item."
-
-  # ================================================================
-  #  AFFECTIVE & EMOTIONAL
-  # ================================================================
-  - id: valence
-    label: "Valence"
-    cluster: affective_emotion
-    measurement:
-      category: Likert
-      primary_unit: "9-point (SAM)"
-      allowed_units: ["9-point", "5-point", "Likert", "VAS"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 9]
-    aliases: [affect_valence, sam_valence, SAM_valence]
-    instruments: ["SAM (valence)", "PANAS"]
-
-  - id: arousal
-    label: "Arousal"
-    cluster: affective_emotion
-    measurement:
-      category: Likert
-      primary_unit: "9-point (SAM)"
-      scale_type: ordinal
-      direction: neutral
-      canonical_range: [1, 9]
-    aliases: [SAM_arousal, sam_arousal, activation, excitement]
-    instruments: ["SAM (arousal)"]
-    notes: "SAM arousal manikin. High = excited/aroused, low = calm."
-
-  - id: dominance
-    label: "Dominance"
-    cluster: affective_emotion
-    measurement:
-      category: Likert
-      primary_unit: "9-point (SAM)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 9]
-    aliases: [SAM_dominance, sam_dominance, control]
-    instruments: ["SAM (dominance)"]
-
-  - id: panas_positive
-    label: "PANAS — Positive Affect"
-    cluster: affective_emotion
-    measurement:
-      category: Score
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [panas_pa, PA, positive_affect, PANAS_PA]
-    instruments: ["PANAS"]
-    notes: "Mean of 10 positive items, each 1–5."
-
-  - id: panas_negative
-    label: "PANAS — Negative Affect"
-    cluster: affective_emotion
-    measurement:
-      category: Score
-      primary_unit: "5-point (1–5)"
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [1, 5]
-    aliases: [panas_na, NA_affect, negative_affect, PANAS_NA]
-    instruments: ["PANAS"]
-    notes: "Mean of 10 negative items, each 1–5."
-
-  - id: engagement_level
-    label: "Engagement"
-    cluster: affective_emotion
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      allowed_units: ["5-point", "7-point", "Likert", "index"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 5]
-    aliases: [user_engagement, attention_score, engagement_index, UES_score]
-    instruments: ["UES", "SAM (arousal)"]
-
-  - id: stress
-    label: "Stress"
-    cluster: affective_emotion
-    measurement:
-      category: Likert
-      primary_unit: "5-point (1–5)"
-      allowed_units: ["Likert", "VAS"]
-      scale_type: ordinal
-      direction: lower_is_better
-      canonical_range: [1, 5]
-    aliases: [perceived_stress, strain, PSS_score]
-    instruments: ["PSS"]
-
-  - id: usability_problems
-    label: "Usability Problems"
-    cluster: ux_satisfaction
-    measurement:
-      category: Count
-      primary_unit: integer
-      allowed_units: [count, integer]
-      scale_type: ratio
-      direction: lower_is_better
-    aliases: [usability_issues, issue_count]
-    instruments: []
-    notes: "If severity is rated, include scale."
-
-  # ================================================================
-  #  DRIVING-SPECIFIC METRICS
-  # ================================================================
-  - id: sdlp
-    label: "Standard Deviation of Lateral Position"
-    cluster: performance
-    measurement:
-      category: Continuous
-      primary_unit: meters
-      scale_type: ratio
-      direction: lower_is_better
-    aliases: [SDLP, lane_deviation_sd, lateral_deviation, lane_keeping]
-    instruments: []
-    notes: "Key driving performance metric. Lower = better lane keeping."
-
-  - id: ttc
-    label: "Time to Collision"
-    cluster: safety_trust
-    measurement:
-      category: Time
-      primary_unit: seconds
-      scale_type: ratio
-      direction: higher_is_better
-    aliases: [TTC, time_to_collision, ttc_min, minimum_ttc]
-    instruments: []
-    notes: "Higher TTC = safer following distance."
-
-  - id: brake_reaction_time
-    label: "Brake Reaction Time"
-    cluster: performance
-    measurement:
-      category: Time
-      primary_unit: seconds
-      scale_type: ratio
-      direction: lower_is_better
-    aliases: [brake_rt, BRT, braking_time, brake_response_time, pedal_reaction_time]
-    instruments: []
-
-  - id: takeover_time
-    label: "Takeover Time"
-    cluster: performance
-    measurement:
-      category: Time
-      primary_unit: seconds
-      scale_type: ratio
-      direction: lower_is_better
-    aliases: [TOT, takeover_reaction_time, TOR_time, handover_time, transition_time]
-    instruments: []
-    notes: "Time from TOR (takeover request) to first driver input."
-
-  - id: headway
-    label: "Headway / Following Distance"
-    cluster: safety_trust
-    measurement:
-      category: Continuous
-      primary_unit: seconds
-      scale_type: ratio
-      direction: higher_is_better
-    aliases: [THW, time_headway, following_distance, headway_time]
-    instruments: []
-
-  - id: gaze_on_road
-    label: "Gaze on Road Percentage"
-    cluster: behavioral_interaction
-    measurement:
-      category: Proportion
-      primary_unit: percentage
-      scale_type: ratio
-      direction: higher_is_better
-      canonical_range: [0, 100]
-    aliases: [percent_road_center, gaze_road, eyes_on_road, PRC]
-    instruments: []
-
-  - id: max_lateral_acceleration
-    label: "Maximum Lateral Acceleration"
-    cluster: performance
-    measurement:
-      category: Continuous
-      primary_unit: "m/s²"
-      scale_type: ratio
-      direction: lower_is_better
-    aliases: [max_lat_accel, lateral_g, swerving]
-    instruments: []
-
-  # ================================================================
-  #  PHYSIOLOGICAL & BIOMETRIC
-  # ================================================================
-  - id: eda_gsr
-    label: "Electrodermal Activity (EDA/GSR)"
-    cluster: physiological_biometric
-    measurement:
-      category: Physiological
-      primary_unit: microsiemens
-      allowed_units: [µS, microsiemens, z-score]
-      scale_type: ratio
-      direction: neutral
-    aliases: [gsr, skin_conductance, eda, galvanic_skin_response, SCL, SCR]
-    instruments: ["Shimmer GSR", "Empatica E4"]
-
-  - id: hr_bpm
-    label: "Heart Rate"
-    cluster: physiological_biometric
-    measurement:
-      category: Physiological
-      primary_unit: bpm
-      scale_type: ratio
-      direction: neutral
-    aliases: [heart_rate, hr, HR, pulse, bpm]
-    instruments: ["Polar H10", "Empatica E4"]
-
-  - id: hrv_rmssd
-    label: "Heart Rate Variability (RMSSD)"
-    cluster: physiological_biometric
-    measurement:
-      category: Physiological
-      primary_unit: milliseconds
-      scale_type: ratio
-      direction: neutral
-    aliases: [hrv, HRV, RMSSD, rmssd, heart_rate_variability, rr_interval, SDNN]
-    instruments: ["Polar H10", "Empatica E4"]
-    notes: "Report RMSSD or SDNN; specify which."
-
-  - id: emg
-    label: "Electromyography"
-    cluster: physiological_biometric
-    measurement:
-      category: Physiological
-      primary_unit: microvolts
-      scale_type: ratio
-      direction: neutral
-    aliases: [EMG, emg_rms, muscle_activity, corrugator, zygomaticus]
-    instruments: []
-
-  - id: pupil_dilation
-    label: "Pupil Dilation"
-    cluster: physiological_biometric
-    measurement:
-      category: Physiological
-      primary_unit: millimeters
-      allowed_units: [mm, millimeters, z-score]
-      scale_type: ratio
-      direction: neutral
-    aliases: [pupil_size, pupil_diameter, PCPS, baseline_corrected_pupil]
-    instruments: ["Tobii Pro", "Pupil Labs"]
-
-  # ---- Eye-tracking (separate DVs instead of lumped) ----
-  - id: fixation_duration
-    label: "Fixation Duration"
-    cluster: physiological_biometric
-    measurement:
-      category: Time
-      primary_unit: milliseconds
-      scale_type: ratio
-      direction: neutral
-    aliases: [fix_duration, mean_fixation_duration, avg_fixation_ms, gaze_fixation]
-    instruments: ["Tobii Pro", "EyeLink"]
-
-  - id: fixation_count
-    label: "Fixation Count"
-    cluster: physiological_biometric
-    measurement:
-      category: Count
-      primary_unit: integer
-      scale_type: ratio
-      direction: neutral
-    aliases: [fix_count, number_of_fixations, n_fixations]
-    instruments: ["Tobii Pro", "EyeLink"]
-
-  - id: saccade_rate
-    label: "Saccade Rate"
-    cluster: physiological_biometric
-    measurement:
-      category: Continuous
-      primary_unit: "saccades/s"
-      scale_type: ratio
-      direction: neutral
-    aliases: [saccade_frequency, saccades_per_second, saccade_amplitude]
-    instruments: ["Tobii Pro", "EyeLink"]
-
-  - id: dwell_time
-    label: "Dwell Time (AOI)"
-    cluster: physiological_biometric
-    measurement:
-      category: Time
-      primary_unit: milliseconds
-      scale_type: ratio
-      direction: neutral
-    aliases: [aoi_dwell, gaze_dwell, total_dwell_time, time_in_aoi]
-    instruments: ["Tobii Pro", "EyeLink"]
-
-  - id: scanpath_length
-    label: "Scanpath Length"
-    cluster: physiological_biometric
-    measurement:
-      category: Continuous
-      primary_unit: pixels
-      scale_type: ratio
-      direction: neutral
-    aliases: [scan_path, gaze_path_length, total_scanpath]
-    instruments: ["Tobii Pro"]
-
-  # Keep the legacy lumped entry for backwards compatibility
-  - id: eye_tracking
-    label: "Eye-Tracking Metrics (generic)"
-    cluster: physiological_biometric
-    measurement:
-      category: Time
-      primary_unit: milliseconds
-      allowed_units: [ms, milliseconds, count]
-      scale_type: ratio
-      direction: neutral
-    aliases: [gaze]
-    instruments: ["Tobii Pro", "EyeLink"]
-    notes: "DEPRECATED — prefer fixation_duration, fixation_count, saccade_rate, dwell_time."
-
-  # ================================================================
-  #  SOCIAL & COLLABORATIVE
-  # ================================================================
-  - id: social_presence
-    label: "Social Presence"
-    cluster: social_collaboration
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      allowed_units: ["5-point", "7-point", "Likert"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [co_presence, copresence, social_presence_score]
-    instruments: ["Networked Minds Social Presence"]
-
-  - id: collaboration_quality
-    label: "Collaboration Quality"
-    cluster: social_collaboration
-    measurement:
-      category: Likert
-      primary_unit: "7-point (1–7)"
-      allowed_units: ["Likert", "index"]
-      scale_type: ordinal
-      direction: higher_is_better
-      canonical_range: [1, 7]
-    aliases: [team_effectiveness, coordination_quality]
-    instruments: []
-
-  # ================================================================
-  #  ACCESSIBILITY & INCLUSIVITY
-  # ================================================================
-  - id: accessibility_outcome
-    label: "Accessibility Outcome"
-    cluster: accessibility_inclusion
-    measurement:
-      category: Binary
-      primary_unit: success_failure
-      allowed_units: [success_failure, count, Likert]
-      scale_type: nominal
-      direction: higher_is_better
-      canonical_range: [0, 1]
-    aliases: [accessible_use, barrier_count, success_with_AT]
-    instruments: []
+- id: task_completion_time
+  label: Task Completion Time
+  cluster: performance
+  measurement:
+    category: Time
+    primary_unit: seconds
+    allowed_units:
+    - s
+    - ms
+    - min
+    scale_type: ratio
+    direction: lower_is_better
+  aliases:
+  - time_spent
+  - completion_duration
+  - task_time
+  - duration
+  - time_on_task
+  - response_time
+  - reaction_time
+  - rt
+  - task_duration
+  instruments: []
+  units:
+  - s
+  - ms
+  notes: Lower-is-better; report central tendency + dispersion.
+- id: task_success
+  label: Task Success Rate
+  cluster: performance
+  measurement:
+    category: Binary
+    primary_unit: proportion
+    allowed_units:
+    - proportion
+    - percentage
+    - binary
+    scale_type: ratio
+    direction: higher_is_better
+    canonical_range:
+    - 0
+    - 1
+  aliases:
+  - success_rate
+  - completion_rate
+  - task_success_ratio
+  - accuracy
+  - correct_rate
+  instruments: []
+  units:
+  - '%'
+  - proportion
+  notes: Define success criteria clearly.
+- id: error_rate
+  label: Error Rate
+  cluster: performance
+  measurement:
+    category: Accuracy
+    primary_unit: percentage
+    allowed_units:
+    - percentage
+    - proportion
+    - count
+    - rate
+    scale_type: ratio
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 100
+  aliases:
+  - mistake_ratio
+  - failure_rate
+  - error_percentage
+  - error_count
+  - errors
+  instruments: []
+  units:
+  - '%'
+  - count
+  - errors/task
+  notes: Distinguish slips vs mistakes if available.
+- id: efficiency
+  label: Efficiency
+  cluster: performance
+  measurement:
+    category: Proportion
+    primary_unit: ratio
+    allowed_units:
+    - ratio
+    - rate
+    - percentage
+    scale_type: ratio
+    direction: higher_is_better
+  aliases:
+  - throughput
+  - keystrokes_per_task
+  - steps_per_task
+  - task_efficiency
+  instruments: []
+  units:
+  - tasks/min
+  - actions/task
+  notes: Report how computed (e.g., tasks/min; actions/task).
+- id: click_through_rate
+  label: Click-Through Rate
+  cluster: behavioral_interaction
+  measurement:
+    category: Proportion
+    primary_unit: percentage
+    allowed_units:
+    - percentage
+    - proportion
+    - ratio
+    scale_type: ratio
+    direction: neutral
+    canonical_range:
+    - 0
+    - 100
+  aliases:
+  - ctr
+  - click_ratio
+  - clicks_per_view
+  instruments: []
+  units:
+  - '%'
+  - ratio
+- id: interaction_events
+  label: Interaction Events
+  cluster: behavioral_interaction
+  measurement:
+    category: Count
+    primary_unit: integer
+    allowed_units:
+    - count
+    - frequency
+    - events_per_min
+    scale_type: ratio
+    direction: neutral
+  aliases:
+  - clicks
+  - taps
+  - keystrokes
+  - interactions
+  - touch_count
+  instruments: []
+  units:
+  - count
+  - events/min
+- id: retention_time
+  label: Retention / Dwell Time
+  cluster: behavioral_interaction
+  measurement:
+    category: Time
+    primary_unit: seconds
+    allowed_units:
+    - s
+    - ms
+    - min
+    scale_type: ratio
+    direction: higher_is_better
+  aliases:
+  - dwell_time
+  - session_duration
+  - time_on_page
+  instruments: []
+  units:
+  - s
+  - min
+- id: TLX_SCORE
+  label: NASA-TLX Composite Score
+  cluster: cognitive_load
+  measurement:
+    category: Score
+    primary_unit: weighted composite
+    allowed_units:
+    - weighted composite
+    - unweighted composite
+    scale_type: ratio
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 100
+  aliases:
+  - tlxScore
+  - TLXScore
+  - tlx_score
+  - NASA_TLX_SCORE
+  - nasa_tlx_score
+  - nasa_tlx_total
+  - TLX_total
+  - raw_tlx
+  - rtlx
+  instruments:
+  - NASA-TLX
+  units:
+  - weighted composite
+  - unweighted composite
+  notes: Derived summary score. Lower is better; report central tendency + dispersion.
+- id: mental_demand
+  label: Mental Demand
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 21-point (0-20)
+    allowed_units:
+    - 21-point
+    - Likert
+    - VAS
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 20
+  aliases:
+  - cognitive_load
+  - mental_load
+  - workload_rating
+  - tlx_mental_demand
+  - nasa_tlx_mental
+  - NASA-TLX1
+  - TLX1
+  - tlx1
+  - NASA_TLX1
+  - nasa_tlx1
+  - MentalLoad
+  - ML
+  instruments:
+  - NASA-TLX (Global or Subscales)
+  - Paas Scale
+  - RSME
+  units:
+  - Likert
+  - VAS
+- id: physical_demand
+  label: Physical Demand
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 21-point (0–20)
+    allowed_units:
+    - 21-point
+    - Likert
+    - VAS
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 20
+  aliases:
+  - TLX2
+  - tlx2
+  - NASA_TLX2
+  - nasa_tlx2
+  - physical_demand
+  - tlx_physical
+  instruments:
+  - NASA-TLX
+  units:
+  - Likert
+  - VAS
+- id: temporal_demand
+  label: Temporal Demand
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 21-point (0–20)
+    allowed_units:
+    - 21-point
+    - Likert
+    - VAS
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 20
+  aliases:
+  - TLX3
+  - tlx3
+  - NASA_TLX3
+  - nasa_tlx3
+  - temporal_demand
+  - tlx_temporal
+  instruments:
+  - NASA-TLX
+  units:
+  - Likert
+  - VAS
+- id: performance
+  label: Performance (TLX)
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 21-point (0–20)
+    allowed_units:
+    - 21-point
+    - Likert
+    - VAS
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 20
+  aliases:
+  - TLX4
+  - tlx4
+  - NASA_TLX4
+  - nasa_tlx4
+  - performance
+  - tlx_performance
+  instruments:
+  - NASA-TLX
+  units:
+  - Likert
+  - VAS
+  notes: 'Note: scale direction is inverted for this subscale in raw NASA-TLX scoring.'
+- id: effort
+  label: Effort
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 21-point (0–20)
+    allowed_units:
+    - 21-point
+    - Likert
+    - VAS
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 20
+  aliases:
+  - TLX5
+  - tlx5
+  - NASA_TLX5
+  - nasa_tlx5
+  - effort
+  - tlx_effort
+  instruments:
+  - NASA-TLX
+  units:
+  - Likert
+  - VAS
+- id: frustration
+  label: Frustration
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 21-point (0–20)
+    allowed_units:
+    - 21-point
+    - Likert
+    - VAS
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 20
+  aliases:
+  - TLX6
+  - tlx6
+  - NASA_TLX6
+  - nasa_tlx6
+  - frustration
+  - tlx_frustration
+  instruments:
+  - NASA-TLX
+  units:
+  - Likert
+  - VAS
+- id: dali_total
+  label: DALI Total Score
+  cluster: cognitive_load
+  measurement:
+    category: Score
+    primary_unit: 6-point (0–5)
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 5
+    allowed_units: &id001
+    - 6-point
+    - Likert
+    - score
+  aliases:
+  - DALI_score
+  - dali_score
+  - driving_activity_load
+  - DALI
+  instruments:
+  - DALI
+  notes: Driving Activity Load Index (Pauzié 2008). Mean of 6 subscales, each 0–5.
+- id: dali_effort_of_attention
+  label: DALI — Effort of Attention
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 6-point (0–5)
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 5
+    allowed_units: *id001
+  aliases:
+  - DALI_attention
+  - dali_attention
+  - effort_of_attention
+  instruments:
+  - DALI
+- id: dali_visual_demand
+  label: DALI — Visual Demand
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 6-point (0–5)
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 5
+    allowed_units: *id001
+  aliases:
+  - DALI_visual
+  - dali_visual
+  - visual_demand
+  instruments:
+  - DALI
+- id: dali_auditory_demand
+  label: DALI — Auditory Demand
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 6-point (0–5)
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 5
+    allowed_units: *id001
+  aliases:
+  - DALI_auditory
+  - dali_auditory
+  - auditory_demand
+  instruments:
+  - DALI
+- id: dali_temporal_demand
+  label: DALI — Temporal Demand
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 6-point (0–5)
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 5
+    allowed_units: *id001
+  aliases:
+  - DALI_temporal
+  - dali_temporal_demand
+  instruments:
+  - DALI
+- id: dali_interference
+  label: DALI — Interference
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 6-point (0–5)
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 5
+    allowed_units: *id001
+  aliases:
+  - DALI_interference
+  - dali_int
+  instruments:
+  - DALI
+- id: dali_situational_stress
+  label: DALI — Situational Stress
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 6-point (0–5)
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 5
+    allowed_units: *id001
+  aliases:
+  - DALI_stress
+  - dali_stress
+  instruments:
+  - DALI
+- id: sart_total
+  label: sART Total Score
+  cluster: cognitive_load
+  measurement:
+    category: Continuous
+    primary_unit: composite
+    scale_type: ordinal
+    direction: higher_is_better
+    allowed_units:
+    - score
+    - weighted composite
+  aliases:
+  - SART_total
+  - sart_score
+  - SART
+  - situational_awareness_rating
+  instruments:
+  - SART
+  notes: Total = Understanding − (Demand − Supply). Range depends on subscale computation.
+- id: sart_understanding
+  label: sART Understanding Subscale
+  cluster: cognitive_load
+  measurement:
+    category: Continuous
+    primary_unit: 21-point (0–20)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 0
+    - 20
+    allowed_units: &id002
+    - 21-point
+    - Likert
+    - VAS
+  aliases:
+  - sart_understanding_rating
+  - sart_u
+  - SART_Understanding
+  - SARTUnderstanding
+  instruments:
+  - SART
+  notes: 'Understanding subscale of the Situation Awareness Rating Technique (SART;
+    Taylor 1990). Scored 0–20. Distinct from eHMI comprehension items — do not pool
+    with understanding_rating.
+
+    '
+- id: sart_demand
+  label: sART Demand Subscale
+  cluster: cognitive_load
+  measurement:
+    category: Continuous
+    primary_unit: 21-point (0–20)
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 20
+    allowed_units: *id002
+  aliases:
+  - sart_d
+  - SART_Demand
+  - SARTDemand
+  - sart_demand_rating
+  instruments:
+  - SART
+- id: sart_supply
+  label: sART Supply Subscale
+  cluster: cognitive_load
+  measurement:
+    category: Continuous
+    primary_unit: 21-point (0–20)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 0
+    - 20
+    allowed_units: *id002
+  aliases:
+  - sart_s
+  - SART_Supply
+  - SARTSupply
+  - sart_supply_rating
+  instruments:
+  - SART
+- id: situational_awareness
+  label: Situational Awareness (generic)
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: score
+    allowed_units:
+    - score
+    - Likert
+    - percentage
+    scale_type: ordinal
+    direction: higher_is_better
+  aliases:
+  - sa
+  - SA_score
+  - sagat_score
+  instruments:
+  - SAGAT
+  - SPAM
+  units:
+  - score
+  - '%'
+- id: perceived_safety
+  label: Perceived Safety
+  cluster: safety_trust
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    allowed_units:
+    - Likert
+    - score
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+  aliases:
+  - PerceivedSafety
+  - PS
+  - perceived_safety_score
+  - safety_rating
+  notes: Bipolar 7-point scale (−3 to +3) as used in eHMI studies.
+- id: perceived_risk
+  label: Perceived Risk
+  cluster: safety_trust
+  measurement:
+    category: Continuous
+    primary_unit: VAS (1–100)
+    allowed_units:
+    - VAS
+    - score
+    scale_type: ratio
+    direction: lower_is_better
+    canonical_range:
+    - 1
+    - 100
+  aliases:
+  - perceivedRisk
+  - perceived_risk_rating
+  - risk_rating
+  - ArduinoData1_osf_cwd6h
+  instruments: []
+  units:
+  - VAS (1–100)
+  notes: Visual Analogue Scale for perceived risk. In osf_cwd6h, ArduinoData1 encodes
+    this measure.
+- id: trust_rating
+  label: Trust in Automation / eHMI
+  cluster: safety_trust
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    allowed_units:
+    - Likert
+    - score
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - Trust
+  - trust_score
+  - trust_in_automation
+  notes: Generic single-item trust. For multi-item scales, use TiA or Jian subscales.
+- id: tia_reliability_competence
+  label: TiA — Reliability/Competence
+  cluster: safety_trust
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: &id003
+    - 5-point
+    - Likert
+    - score
+  aliases:
+  - TiA_RC
+  - tia_rc
+  - reliability_competence
+  - TiA1
+  - trust_reliability
+  instruments:
+  - Körber TiA
+- id: tia_understanding_predictability
+  label: TiA — Understanding/Predictability
+  cluster: safety_trust
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - TiA_UP
+  - tia_up
+  - understanding_predictability
+  - TiA2
+  - trust_predictability
+  instruments:
+  - Körber TiA
+- id: tia_familiarity
+  label: TiA — Familiarity
+  cluster: safety_trust
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - TiA_F
+  - tia_fam
+  - trust_familiarity
+  - TiA3
+  instruments:
+  - Körber TiA
+- id: tia_intention_of_developers
+  label: TiA — Intention of Developers
+  cluster: safety_trust
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - TiA_ID
+  - tia_id
+  - intention_developers
+  - TiA4
+  - trust_developers
+  instruments:
+  - Körber TiA
+- id: tia_propensity_to_trust
+  label: TiA — Propensity to Trust
+  cluster: safety_trust
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - TiA_PT
+  - tia_pt
+  - propensity_trust
+  - TiA5
+  - trust_propensity
+  instruments:
+  - Körber TiA
+- id: tia_trust_in_automation
+  label: TiA — Trust in Automation
+  cluster: safety_trust
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - TiA_TiA
+  - tia_tia
+  - TiA6
+  - trust_automation_scale
+  instruments:
+  - Körber TiA
+  notes: Overall TiA subscale. Not to be confused with the single-item trust_rating.
+- id: jian_trust
+  label: Jian Trust Scale
+  cluster: safety_trust
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+    allowed_units: &id005
+    - 7-point
+    - Likert
+    - score
+  aliases:
+  - jian_trust_score
+  - jian_scale
+  - trust_jian
+  - checklist_trust
+  instruments:
+  - Jian et al. Trust Scale
+  notes: 12-item trust/distrust checklist (Jian, Bisantz & Drury 2000). Mean of trust
+    items on 1–7.
+- id: understanding_rating
+  label: Understanding / Comprehension (eHMI)
+  cluster: cognitive_load
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    allowed_units:
+    - Likert
+    - score
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - Understanding
+  notes: eHMI signal comprehension item. Do NOT use for sART Understanding subscale
+    — see sart_understanding.
+- id: aesthetics_rating
+  label: Aesthetic Evaluation
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    allowed_units:
+    - Likert
+    - score
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+  aliases:
+  - Aesthetics
+  - visual_appeal
+  - attractiveness_rating
+- id: acceptance_rating
+  label: Acceptance (generic)
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    allowed_units:
+    - Likert
+    - score
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+  aliases:
+  - Acceptance
+  - acceptance_score
+- id: user_satisfaction
+  label: User Satisfaction
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point
+    allowed_units:
+    - 5-point
+    - 7-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+  aliases:
+  - satisfaction_score
+  - satisfaction_rating
+  - user_feedback
+  - perceived_quality
+  - CSAT
+  instruments:
+  - UEQ
+  - UMUX / UMUX-Lite
+  - CSAT
+  - NPS
+  units:
+  - UEQ scale
+  - Likert
+  - NPS
+- id: usability
+  label: Usability (SUS Total)
+  cluster: ux_satisfaction
+  measurement:
+    category: Score
+    primary_unit: SUS (0–100)
+    allowed_units:
+    - 100-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 0
+    - 100
+  aliases:
+  - sus_score
+  - system_usability_scale
+  - SUSScore
+  - susScore
+  - SYSTEM_USABILITY_SCORE
+  - system_usability_score
+  - SUS_total
+  instruments:
+  - SUS
+  units:
+  - SUS (0–100)
+- id: SUS1
+  label: SUS Item 1
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - sus1
+  - usability_q1
+  - UsabilityQ1
+  - U1
+  instruments:
+  - SUS
+- id: SUS2
+  label: SUS Item 2
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - sus2
+  - usability_q2
+  - UsabilityQ2
+  - U2
+  instruments:
+  - SUS
+- id: SUS3
+  label: SUS Item 3
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - sus3
+  - usability_q3
+  - UsabilityQ3
+  - U3
+  instruments:
+  - SUS
+- id: SUS4
+  label: SUS Item 4
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - sus4
+  - usability_q4
+  - UsabilityQ4
+  - U4
+  instruments:
+  - SUS
+- id: SUS5
+  label: SUS Item 5
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - sus5
+  - usability_q5
+  - UsabilityQ5
+  - U5
+  instruments:
+  - SUS
+- id: SUS6
+  label: SUS Item 6
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - sus6
+  - usability_q6
+  - UsabilityQ6
+  - U6
+  instruments:
+  - SUS
+- id: SUS7
+  label: SUS Item 7
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - sus7
+  - usability_q7
+  - UsabilityQ7
+  - U7
+  instruments:
+  - SUS
+- id: SUS8
+  label: SUS Item 8
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - sus8
+  - usability_q8
+  - UsabilityQ8
+  - U8
+  instruments:
+  - SUS
+- id: SUS9
+  label: SUS Item 9
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - sus9
+  - usability_q9
+  - UsabilityQ9
+  - U9
+  instruments:
+  - SUS
+- id: SUS10
+  label: SUS Item 10
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - sus10
+  - usability_q10
+  - UsabilityQ10
+  - U10
+  instruments:
+  - SUS
+- id: ueq_attractiveness
+  label: UEQ — Attractiveness
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: &id004
+    - 7-point
+    - Likert
+    - score
+  aliases:
+  - UEQ_attractiveness
+  - ueq_att
+  - UEQ_ATT
+  - attractiveness
+  instruments:
+  - UEQ
+  - UEQ+
+- id: ueq_perspicuity
+  label: UEQ — Perspicuity
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: *id004
+  aliases:
+  - UEQ_perspicuity
+  - ueq_per
+  - UEQ_PER
+  - perspicuity
+  - clarity
+  instruments:
+  - UEQ
+  - UEQ+
+- id: ueq_efficiency
+  label: UEQ — Efficiency
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: *id004
+  aliases:
+  - UEQ_efficiency
+  - ueq_eff
+  - UEQ_EFF
+  instruments:
+  - UEQ
+  - UEQ+
+- id: ueq_dependability
+  label: UEQ — Dependability
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: *id004
+  aliases:
+  - UEQ_dependability
+  - ueq_dep
+  - UEQ_DEP
+  - dependability
+  instruments:
+  - UEQ
+  - UEQ+
+- id: ueq_stimulation
+  label: UEQ — Stimulation
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: *id004
+  aliases:
+  - UEQ_stimulation
+  - ueq_sti
+  - UEQ_STI
+  - stimulation
+  instruments:
+  - UEQ
+  - UEQ+
+- id: ueq_novelty
+  label: UEQ — Novelty
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: *id004
+  aliases:
+  - UEQ_novelty
+  - ueq_nov
+  - UEQ_NOV
+  - novelty
+  - originality
+  instruments:
+  - UEQ
+  - UEQ+
+- id: ueq_pragmatic
+  label: UEQ — Pragmatic Quality (PQ)
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: *id004
+  aliases:
+  - UEQ_PQ
+  - ueq_pq
+  - pragmatic_quality
+  - UEQ_S_PQ
+  instruments:
+  - UEQ-S
+  - UEQ
+  notes: UEQ-S pragmatic quality = mean(perspicuity, efficiency, dependability).
+- id: ueq_hedonic
+  label: UEQ — Hedonic Quality (HQ)
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: *id004
+  aliases:
+  - UEQ_HQ
+  - ueq_hq
+  - hedonic_quality
+  - UEQ_S_HQ
+  instruments:
+  - UEQ-S
+  - UEQ
+  notes: UEQ-S hedonic quality = mean(stimulation, novelty).
+- id: attrakdiff_pq
+  label: AttrakDiff — Pragmatic Quality
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: *id004
+  aliases:
+  - AD_PQ
+  - attrakdiff_pragmatic
+  - pragmatic_quality_ad
+  instruments:
+  - AttrakDiff
+- id: attrakdiff_hqs
+  label: AttrakDiff — Hedonic Quality (Stimulation)
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: *id004
+  aliases:
+  - AD_HQS
+  - attrakdiff_stimulation
+  - HQ_S
+  instruments:
+  - AttrakDiff
+- id: attrakdiff_hqi
+  label: AttrakDiff — Hedonic Quality (Identity)
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: *id004
+  aliases:
+  - AD_HQI
+  - attrakdiff_identity
+  - HQ_I
+  instruments:
+  - AttrakDiff
+- id: attrakdiff_att
+  label: AttrakDiff — Attractiveness
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (-3–3)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -3
+    - 3
+    allowed_units: *id004
+  aliases:
+  - AD_ATT
+  - attrakdiff_attractiveness
+  instruments:
+  - AttrakDiff
+- id: utaut_performance_expectancy
+  label: UTAUT — Performance Expectancy
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+    allowed_units: *id005
+  aliases:
+  - PE
+  - performance_expectancy
+  - utaut_pe
+  - UTAUT_PE
+  instruments:
+  - UTAUT
+  - UTAUT2
+- id: utaut_effort_expectancy
+  label: UTAUT — Effort Expectancy
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+    allowed_units: *id005
+  aliases:
+  - EE
+  - effort_expectancy
+  - utaut_ee
+  - UTAUT_EE
+  - ease_of_use
+  instruments:
+  - UTAUT
+  - UTAUT2
+- id: utaut_social_influence
+  label: UTAUT — Social Influence
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+    allowed_units: *id005
+  aliases:
+  - SI
+  - social_influence
+  - utaut_si
+  - UTAUT_SI
+  instruments:
+  - UTAUT
+  - UTAUT2
+- id: utaut_facilitating_conditions
+  label: UTAUT — Facilitating Conditions
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+    allowed_units: *id005
+  aliases:
+  - FC
+  - facilitating_conditions
+  - utaut_fc
+  - UTAUT_FC
+  instruments:
+  - UTAUT
+  - UTAUT2
+- id: utaut_behavioral_intention
+  label: UTAUT — Behavioral Intention
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+    allowed_units: *id005
+  aliases:
+  - BI
+  - behavioral_intention
+  - utaut_bi
+  - UTAUT_BI
+  - intention_to_use
+  instruments:
+  - UTAUT
+  - UTAUT2
+  - TAM
+- id: utaut_hedonic_motivation
+  label: UTAUT2 — Hedonic Motivation
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+    allowed_units: *id005
+  aliases:
+  - HM
+  - hedonic_motivation
+  - utaut2_hm
+  instruments:
+  - UTAUT2
+- id: tam_perceived_usefulness
+  label: TAM — Perceived Usefulness
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+    allowed_units: *id005
+  aliases:
+  - PU
+  - perceived_usefulness
+  - tam_pu
+  - TAM_PU
+  instruments:
+  - TAM
+  - TAM2
+  - TAM3
+- id: tam_perceived_ease_of_use
+  label: TAM — Perceived Ease of Use
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+    allowed_units: *id005
+  aliases:
+  - PEOU
+  - perceived_ease_of_use
+  - tam_peou
+  - TAM_PEOU
+  instruments:
+  - TAM
+  - TAM2
+  - TAM3
+- id: AOA_USEFULNESS
+  label: van der Laan Acceptance — Usefulness Subscale
+  cluster: ux_satisfaction
+  measurement:
+    category: Score
+    primary_unit: 5-point (-2 to +2)
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -2
+    - 2
+  aliases:
+  - AOAUsefulness
+  - aoa_usefulness
+  - van_der_laan_usefulness
+  - acceptance_usefulness
+  - vdl_usefulness
+  instruments:
+  - van der Laan Acceptance Scale
+  notes: Derived subscale score; mean of AOA usefulness items.
+- id: AOA_SATISFYING
+  label: van der Laan Acceptance — Satisfying Subscale
+  cluster: ux_satisfaction
+  measurement:
+    category: Score
+    primary_unit: 5-point (-2 to +2)
+    allowed_units:
+    - 5-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -2
+    - 2
+  aliases:
+  - AOASatisfying
+  - aoa_satisfying
+  - van_der_laan_satisfying
+  - acceptance_satisfying
+  - vdl_satisfying
+  instruments:
+  - van der Laan Acceptance Scale
+  notes: Derived subscale score; mean of AOA satisfying items.
+- id: AOA1
+  label: van der Laan — Item 1
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (-2 to +2)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -2
+    - 2
+    allowed_units: &id006
+    - 5-point
+    - Likert
+  aliases:
+  - aoa1
+  - acceptance_1
+  - vdL_1
+  instruments:
+  - van der Laan Acceptance Scale
+- id: AOA2
+  label: van der Laan — Item 2
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (-2 to +2)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -2
+    - 2
+    allowed_units: *id006
+  aliases:
+  - aoa2
+  - acceptance_2
+  - vdL_2
+  instruments:
+  - van der Laan Acceptance Scale
+- id: AOA3
+  label: van der Laan — Item 3
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (-2 to +2)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -2
+    - 2
+    allowed_units: *id006
+  aliases:
+  - aoa3
+  - acceptance_3
+  - vdL_3
+  instruments:
+  - van der Laan Acceptance Scale
+- id: AOA4
+  label: van der Laan — Item 4
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (-2 to +2)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -2
+    - 2
+    allowed_units: *id006
+  aliases:
+  - aoa4
+  - acceptance_4
+  - vdL_4
+  instruments:
+  - van der Laan Acceptance Scale
+- id: AOA5
+  label: van der Laan — Item 5
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (-2 to +2)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -2
+    - 2
+    allowed_units: *id006
+  aliases:
+  - aoa5
+  - acceptance_5
+  - vdL_5
+  instruments:
+  - van der Laan Acceptance Scale
+- id: AOA6
+  label: van der Laan — Item 6
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (-2 to +2)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -2
+    - 2
+    allowed_units: *id006
+  aliases:
+  - aoa6
+  - acceptance_6
+  - vdL_6
+  instruments:
+  - van der Laan Acceptance Scale
+- id: AOA7
+  label: van der Laan — Item 7
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (-2 to +2)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -2
+    - 2
+    allowed_units: *id006
+  aliases:
+  - aoa7
+  - acceptance_7
+  - vdL_7
+  instruments:
+  - van der Laan Acceptance Scale
+- id: AOA8
+  label: van der Laan — Item 8
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (-2 to +2)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -2
+    - 2
+    allowed_units: *id006
+  aliases:
+  - aoa8
+  - acceptance_8
+  - vdL_8
+  instruments:
+  - van der Laan Acceptance Scale
+- id: AOA9
+  label: van der Laan — Item 9
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (-2 to +2)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - -2
+    - 2
+    allowed_units: *id006
+  aliases:
+  - aoa9
+  - acceptance_9
+  - vdL_9
+  instruments:
+  - van der Laan Acceptance Scale
+- id: ssq_total
+  label: SSQ Total Score
+  cluster: physiological_biometric
+  measurement:
+    category: Score
+    primary_unit: SSQ weighted
+    scale_type: ratio
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 235.62
+    allowed_units: &id007
+    - score
+    - weighted
+  aliases:
+  - SSQ_total
+  - ssq_score
+  - simulator_sickness
+  - SSQ
+  - cybersickness_total
+  instruments:
+  - SSQ (Kennedy et al. 1993)
+  notes: Simulator Sickness Questionnaire total. Max theoretical = 235.62. Scores
+    >20 indicate concern.
+- id: ssq_nausea
+  label: SSQ — Nausea
+  cluster: physiological_biometric
+  measurement:
+    category: Score
+    primary_unit: SSQ weighted
+    scale_type: ratio
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 200.34
+    allowed_units: *id007
+  aliases:
+  - SSQ_N
+  - ssq_n
+  - ssq_nausea_score
+  - nausea
+  instruments:
+  - SSQ
+- id: ssq_oculomotor
+  label: SSQ — Oculomotor
+  cluster: physiological_biometric
+  measurement:
+    category: Score
+    primary_unit: SSQ weighted
+    scale_type: ratio
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 159.18
+    allowed_units: *id007
+  aliases:
+  - SSQ_O
+  - ssq_o
+  - ssq_oculomotor_score
+  - oculomotor
+  instruments:
+  - SSQ
+- id: ssq_disorientation
+  label: SSQ — Disorientation
+  cluster: physiological_biometric
+  measurement:
+    category: Score
+    primary_unit: SSQ weighted
+    scale_type: ratio
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 292.32
+    allowed_units: *id007
+  aliases:
+  - SSQ_D
+  - ssq_d
+  - ssq_disorientation_score
+  - disorientation
+  instruments:
+  - SSQ
+- id: vrsq_score
+  label: VRSQ Score
+  cluster: physiological_biometric
+  measurement:
+    category: Score
+    primary_unit: percentage (0–100)
+    scale_type: ratio
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 100
+    allowed_units:
+    - percentage
+    - proportion
+  aliases:
+  - VRSQ
+  - vrsq
+  - vr_sickness
+  - virtual_reality_sickness
+  instruments:
+  - VRSQ (Kim et al. 2018)
+  notes: VR Sickness Questionnaire. 9 items, 0–100% score.
+- id: fms_score
+  label: Fast Motion Sickness Score
+  cluster: physiological_biometric
+  measurement:
+    category: Continuous
+    primary_unit: VAS (0–20)
+    scale_type: ratio
+    direction: lower_is_better
+    canonical_range:
+    - 0
+    - 20
+    allowed_units:
+    - VAS
+    - 20-point
+    - Likert
+  aliases:
+  - FMS
+  - fms
+  - fast_motion_sickness
+  - motion_sickness_score
+  instruments:
+  - FMS (Keshavarz & Hecht 2011)
+- id: ipq_general_presence
+  label: IPQ — General Presence
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (0–6)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 0
+    - 6
+    allowed_units: &id008
+    - 7-point
+    - Likert
+    - score
+  aliases:
+  - IPQ_GP
+  - ipq_gp
+  - general_presence
+  - G1
+  instruments:
+  - IPQ
+  notes: Single-item 'sense of being there' (0–6).
+- id: ipq_spatial_presence
+  label: IPQ — Spatial Presence
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (0–6)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 0
+    - 6
+    allowed_units: *id008
+  aliases:
+  - IPQ_SP
+  - ipq_sp
+  - spatial_presence
+  instruments:
+  - IPQ
+- id: ipq_involvement
+  label: IPQ — Involvement
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (0–6)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 0
+    - 6
+    allowed_units: *id008
+  aliases:
+  - IPQ_INV
+  - ipq_inv
+  - involvement
+  instruments:
+  - IPQ
+- id: ipq_experienced_realism
+  label: IPQ — Experienced Realism
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 7-point (0–6)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 0
+    - 6
+    allowed_units: *id008
+  aliases:
+  - IPQ_REAL
+  - ipq_real
+  - experienced_realism
+  - realness
+  instruments:
+  - IPQ
+- id: godspeed_anthropomorphism
+  label: Godspeed — Anthropomorphism
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - GS_anthropomorphism
+  - godspeed_anthro
+  - anthropomorphism
+  instruments:
+  - Godspeed (Bartneck et al. 2009)
+- id: godspeed_animacy
+  label: Godspeed — Animacy
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - GS_animacy
+  - godspeed_anim
+  - animacy
+  instruments:
+  - Godspeed
+- id: godspeed_likeability
+  label: Godspeed — Likeability
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - GS_likeability
+  - godspeed_like
+  - likeability
+  - likability
+  instruments:
+  - Godspeed
+- id: godspeed_perceived_intelligence
+  label: Godspeed — Perceived Intelligence
+  cluster: ux_satisfaction
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - GS_intelligence
+  - godspeed_pi
+  - perceived_intelligence
+  instruments:
+  - Godspeed
+- id: godspeed_perceived_safety
+  label: Godspeed — Perceived Safety
+  cluster: safety_trust
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - GS_safety
+  - godspeed_safety
+  instruments:
+  - Godspeed
+  notes: Godspeed safety subscale. Distinct from the bipolar perceived_safety item.
+- id: valence
+  label: Valence
+  cluster: affective_emotion
+  measurement:
+    category: Likert
+    primary_unit: 9-point (SAM)
+    allowed_units:
+    - 9-point
+    - 5-point
+    - Likert
+    - VAS
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 9
+  aliases:
+  - affect_valence
+  - sam_valence
+  - SAM_valence
+  instruments:
+  - SAM (valence)
+  - PANAS
+- id: arousal
+  label: Arousal
+  cluster: affective_emotion
+  measurement:
+    category: Likert
+    primary_unit: 9-point (SAM)
+    scale_type: ordinal
+    direction: neutral
+    canonical_range:
+    - 1
+    - 9
+    allowed_units: &id009
+    - 9-point
+    - VAS
+    - Likert
+  aliases:
+  - SAM_arousal
+  - sam_arousal
+  - activation
+  - excitement
+  instruments:
+  - SAM (arousal)
+  notes: SAM arousal manikin. High = excited/aroused, low = calm.
+- id: dominance
+  label: Dominance
+  cluster: affective_emotion
+  measurement:
+    category: Likert
+    primary_unit: 9-point (SAM)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 9
+    allowed_units: *id009
+  aliases:
+  - SAM_dominance
+  - sam_dominance
+  - control
+  instruments:
+  - SAM (dominance)
+- id: panas_positive
+  label: PANAS — Positive Affect
+  cluster: affective_emotion
+  measurement:
+    category: Score
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - panas_pa
+  - PA
+  - positive_affect
+  - PANAS_PA
+  instruments:
+  - PANAS
+  notes: Mean of 10 positive items, each 1–5.
+- id: panas_negative
+  label: PANAS — Negative Affect
+  cluster: affective_emotion
+  measurement:
+    category: Score
+    primary_unit: 5-point (1–5)
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 1
+    - 5
+    allowed_units: *id003
+  aliases:
+  - panas_na
+  - NA_affect
+  - negative_affect
+  - PANAS_NA
+  instruments:
+  - PANAS
+  notes: Mean of 10 negative items, each 1–5.
+- id: engagement_level
+  label: Engagement
+  cluster: affective_emotion
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    allowed_units:
+    - 5-point
+    - 7-point
+    - Likert
+    - index
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - user_engagement
+  - attention_score
+  - engagement_index
+  - UES_score
+  instruments:
+  - UES
+  - SAM (arousal)
+- id: stress
+  label: Stress
+  cluster: affective_emotion
+  measurement:
+    category: Likert
+    primary_unit: 5-point (1–5)
+    allowed_units:
+    - Likert
+    - VAS
+    scale_type: ordinal
+    direction: lower_is_better
+    canonical_range:
+    - 1
+    - 5
+  aliases:
+  - perceived_stress
+  - strain
+  - PSS_score
+  instruments:
+  - PSS
+- id: usability_problems
+  label: Usability Problems
+  cluster: ux_satisfaction
+  measurement:
+    category: Count
+    primary_unit: integer
+    allowed_units:
+    - count
+    - integer
+    scale_type: ratio
+    direction: lower_is_better
+  aliases:
+  - usability_issues
+  - issue_count
+  instruments: []
+  notes: If severity is rated, include scale.
+- id: sdlp
+  label: Standard Deviation of Lateral Position
+  cluster: performance
+  measurement:
+    category: Continuous
+    primary_unit: meters
+    scale_type: ratio
+    direction: lower_is_better
+    allowed_units:
+    - m
+    - cm
+  aliases:
+  - SDLP
+  - lane_deviation_sd
+  - lateral_deviation
+  - lane_keeping
+  instruments: []
+  notes: Key driving performance metric. Lower = better lane keeping.
+- id: ttc
+  label: Time to Collision
+  cluster: safety_trust
+  measurement:
+    category: Time
+    primary_unit: seconds
+    scale_type: ratio
+    direction: higher_is_better
+    allowed_units: &id010
+    - s
+    - ms
+  aliases:
+  - TTC
+  - time_to_collision
+  - ttc_min
+  - minimum_ttc
+  instruments: []
+  notes: Higher TTC = safer following distance.
+- id: brake_reaction_time
+  label: Brake Reaction Time
+  cluster: performance
+  measurement:
+    category: Time
+    primary_unit: seconds
+    scale_type: ratio
+    direction: lower_is_better
+    allowed_units: *id010
+  aliases:
+  - brake_rt
+  - BRT
+  - braking_time
+  - brake_response_time
+  - pedal_reaction_time
+  instruments: []
+- id: takeover_time
+  label: Takeover Time
+  cluster: performance
+  measurement:
+    category: Time
+    primary_unit: seconds
+    scale_type: ratio
+    direction: lower_is_better
+    allowed_units: *id010
+  aliases:
+  - TOT
+  - takeover_reaction_time
+  - TOR_time
+  - handover_time
+  - transition_time
+  instruments: []
+  notes: Time from TOR (takeover request) to first driver input.
+- id: headway
+  label: Headway / Following Distance
+  cluster: safety_trust
+  measurement:
+    category: Continuous
+    primary_unit: seconds
+    scale_type: ratio
+    direction: higher_is_better
+    allowed_units: *id010
+  aliases:
+  - THW
+  - time_headway
+  - following_distance
+  - headway_time
+  instruments: []
+- id: gaze_on_road
+  label: Gaze on Road Percentage
+  cluster: behavioral_interaction
+  measurement:
+    category: Proportion
+    primary_unit: percentage
+    scale_type: ratio
+    direction: higher_is_better
+    canonical_range:
+    - 0
+    - 100
+    allowed_units:
+    - percentage
+    - proportion
+  aliases:
+  - percent_road_center
+  - gaze_road
+  - eyes_on_road
+  - PRC
+  instruments: []
+- id: max_lateral_acceleration
+  label: Maximum Lateral Acceleration
+  cluster: performance
+  measurement:
+    category: Continuous
+    primary_unit: m/s²
+    scale_type: ratio
+    direction: lower_is_better
+    allowed_units:
+    - m/s²
+    - g
+  aliases:
+  - max_lat_accel
+  - lateral_g
+  - swerving
+  instruments: []
+- id: eda_gsr
+  label: Electrodermal Activity (EDA/GSR)
+  cluster: physiological_biometric
+  measurement:
+    category: Physiological
+    primary_unit: microsiemens
+    allowed_units:
+    - µS
+    - microsiemens
+    - z-score
+    scale_type: ratio
+    direction: neutral
+  aliases:
+  - gsr
+  - skin_conductance
+  - eda
+  - galvanic_skin_response
+  - SCL
+  - SCR
+  instruments:
+  - Shimmer GSR
+  - Empatica E4
+- id: hr_bpm
+  label: Heart Rate
+  cluster: physiological_biometric
+  measurement:
+    category: Physiological
+    primary_unit: bpm
+    scale_type: ratio
+    direction: neutral
+    allowed_units:
+    - bpm
+    - beats_per_minute
+  aliases:
+  - heart_rate
+  - hr
+  - HR
+  - pulse
+  - bpm
+  instruments:
+  - Polar H10
+  - Empatica E4
+- id: hrv_rmssd
+  label: Heart Rate Variability (RMSSD)
+  cluster: physiological_biometric
+  measurement:
+    category: Physiological
+    primary_unit: milliseconds
+    scale_type: ratio
+    direction: neutral
+    allowed_units: &id011
+    - ms
+    - milliseconds
+    - s
+  aliases:
+  - hrv
+  - HRV
+  - RMSSD
+  - rmssd
+  - heart_rate_variability
+  - rr_interval
+  - SDNN
+  instruments:
+  - Polar H10
+  - Empatica E4
+  notes: Report RMSSD or SDNN; specify which.
+- id: emg
+  label: Electromyography
+  cluster: physiological_biometric
+  measurement:
+    category: Physiological
+    primary_unit: microvolts
+    scale_type: ratio
+    direction: neutral
+    allowed_units:
+    - µV
+    - microvolts
+    - z-score
+  aliases:
+  - EMG
+  - emg_rms
+  - muscle_activity
+  - corrugator
+  - zygomaticus
+  instruments: []
+- id: pupil_dilation
+  label: Pupil Dilation
+  cluster: physiological_biometric
+  measurement:
+    category: Physiological
+    primary_unit: millimeters
+    allowed_units:
+    - mm
+    - millimeters
+    - z-score
+    scale_type: ratio
+    direction: neutral
+  aliases:
+  - pupil_size
+  - pupil_diameter
+  - PCPS
+  - baseline_corrected_pupil
+  instruments:
+  - Tobii Pro
+  - Pupil Labs
+- id: fixation_duration
+  label: Fixation Duration
+  cluster: physiological_biometric
+  measurement:
+    category: Time
+    primary_unit: milliseconds
+    scale_type: ratio
+    direction: neutral
+    allowed_units: *id011
+  aliases:
+  - fix_duration
+  - mean_fixation_duration
+  - avg_fixation_ms
+  - gaze_fixation
+  instruments:
+  - Tobii Pro
+  - EyeLink
+- id: fixation_count
+  label: Fixation Count
+  cluster: physiological_biometric
+  measurement:
+    category: Count
+    primary_unit: integer
+    scale_type: ratio
+    direction: neutral
+    allowed_units:
+    - count
+    - integer
+  aliases:
+  - fix_count
+  - number_of_fixations
+  - n_fixations
+  instruments:
+  - Tobii Pro
+  - EyeLink
+- id: saccade_rate
+  label: Saccade Rate
+  cluster: physiological_biometric
+  measurement:
+    category: Continuous
+    primary_unit: saccades/s
+    scale_type: ratio
+    direction: neutral
+    allowed_units:
+    - saccades/s
+    - saccades/min
+    - count
+  aliases:
+  - saccade_frequency
+  - saccades_per_second
+  - saccade_amplitude
+  instruments:
+  - Tobii Pro
+  - EyeLink
+- id: dwell_time
+  label: Dwell Time (AOI)
+  cluster: physiological_biometric
+  measurement:
+    category: Time
+    primary_unit: milliseconds
+    scale_type: ratio
+    direction: neutral
+    allowed_units: *id011
+  aliases:
+  - aoi_dwell
+  - gaze_dwell
+  - total_dwell_time
+  - time_in_aoi
+  instruments:
+  - Tobii Pro
+  - EyeLink
+- id: scanpath_length
+  label: Scanpath Length
+  cluster: physiological_biometric
+  measurement:
+    category: Continuous
+    primary_unit: pixels
+    scale_type: ratio
+    direction: neutral
+    allowed_units:
+    - pixels
+    - degrees
+    - mm
+  aliases:
+  - scan_path
+  - gaze_path_length
+  - total_scanpath
+  instruments:
+  - Tobii Pro
+- id: eye_tracking
+  label: Eye-Tracking Metrics (generic)
+  cluster: physiological_biometric
+  measurement:
+    category: Time
+    primary_unit: milliseconds
+    allowed_units:
+    - ms
+    - milliseconds
+    - count
+    scale_type: ratio
+    direction: neutral
+  aliases:
+  - gaze
+  instruments:
+  - Tobii Pro
+  - EyeLink
+  notes: DEPRECATED — prefer fixation_duration, fixation_count, saccade_rate, dwell_time.
+- id: social_presence
+  label: Social Presence
+  cluster: social_collaboration
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    allowed_units:
+    - 5-point
+    - 7-point
+    - Likert
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+  aliases:
+  - co_presence
+  - copresence
+  - social_presence_score
+  instruments:
+  - Networked Minds Social Presence
+- id: collaboration_quality
+  label: Collaboration Quality
+  cluster: social_collaboration
+  measurement:
+    category: Likert
+    primary_unit: 7-point (1–7)
+    allowed_units:
+    - Likert
+    - index
+    scale_type: ordinal
+    direction: higher_is_better
+    canonical_range:
+    - 1
+    - 7
+  aliases:
+  - team_effectiveness
+  - coordination_quality
+  instruments: []
+- id: accessibility_outcome
+  label: Accessibility Outcome
+  cluster: accessibility_inclusion
+  measurement:
+    category: Binary
+    primary_unit: success_failure
+    allowed_units:
+    - success_failure
+    - count
+    - Likert
+    scale_type: nominal
+    direction: higher_is_better
+    canonical_range:
+    - 0
+    - 1
+  aliases:
+  - accessible_use
+  - barrier_count
+  - success_with_AT
+  instruments: []
